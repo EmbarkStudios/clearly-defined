@@ -4,7 +4,7 @@ use http::Request;
 use serde::Deserialize;
 use std::{collections::BTreeMap, convert::TryFrom};
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 pub struct DefCoords {
     #[serde(rename = "type")]
     pub shape: crate::Shape,
@@ -13,25 +13,36 @@ pub struct DefCoords {
     pub revision: crate::CoordVersion,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, PartialEq, Debug)]
 pub struct Hashes {
     pub sha1: String,
     pub sha256: String,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, PartialEq, Debug)]
 pub struct Scores {
     pub total: u32,
     pub date: u32,
     pub source: u32,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, PartialEq, Debug)]
+pub struct SourceLocation {
+    pub r#type: String,
+    pub provider: String,
+    pub namespace: String,
+    pub name: String,
+    pub revision: String,
+    pub url: String,
+}
+
+#[derive(Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct Description {
-    pub release_date: chrono::Date<chrono::Utc>,
-    pub project_website: url::Url,
-    pub urls: BTreeMap<String, url::Url>,
+    pub release_date: chrono::NaiveDate,
+    pub source_location: Option<SourceLocation>,
+    pub project_website: Option<String>,
+    pub urls: BTreeMap<String, String>,
     pub hashes: Hashes,
     pub files: u32,
     pub tools: Vec<String>,
@@ -39,7 +50,7 @@ pub struct Description {
     pub score: Scores,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, PartialEq, Debug)]
 pub struct LicenseScore {
     pub total: u32,
     pub declared: u32,
@@ -49,31 +60,32 @@ pub struct LicenseScore {
     pub texts: u32,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 pub struct Attribution {
     pub unknown: u32,
+    #[serde(default)]
     pub parties: Vec<String>,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 pub struct Discovered {
     pub unknown: u32,
     pub expressions: Vec<String>,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 pub struct Facet {
     pub attribution: Attribution,
     pub discovered: Discovered,
     pub files: u32,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 pub struct Facets {
     pub core: Facet,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct License {
     pub declared: String,
@@ -82,7 +94,7 @@ pub struct License {
     pub score: LicenseScore,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 pub struct File {
     pub path: String,
     pub hashes: Hashes,
@@ -94,15 +106,102 @@ pub struct File {
     pub token: Option<String>,
 }
 
-#[derive(Deserialize)]
+#[derive(Debug)]
 pub struct Definition {
     pub coordinates: DefCoords,
     /// The description of the component, won't be present if the coordinate
     /// has not been harvested
     pub described: Option<Description>,
     pub licensed: Option<License>,
-    #[serde(default)]
     pub files: Vec<File>,
+}
+
+// Somewhat annoyingly, instead of returning null or some kind of error if a
+// coordinate is not in the database, the return will just have a definition
+// that is only partially filled out, so we manually deserialize it and just
+// set the fields that are meaningless to None even if they have default data
+impl<'de> serde::Deserialize<'de> for Definition {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::de::Deserializer<'de>,
+    {
+        use serde::de;
+        use std::fmt;
+
+        struct DefVisitor;
+
+        impl<'de> de::Visitor<'de> for DefVisitor {
+            type Value = Definition;
+
+            fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+                formatter.write_str("struct Definition")
+            }
+
+            fn visit_map<V>(self, mut map: V) -> Result<Definition, V::Error>
+            where
+                V: de::MapAccess<'de>,
+            {
+                let mut coordinates = None;
+                let mut described = None;
+                let mut licensed = None;
+                let mut files = Vec::new();
+                while let Some(key) = map.next_key()? {
+                    match key {
+                        "coordinates" => {
+                            if coordinates.is_some() {
+                                return Err(de::Error::duplicate_field("coordinates"));
+                            }
+
+                            coordinates = Some(map.next_value()?);
+                        }
+                        "described" => {
+                            if described.is_some() {
+                                return Err(de::Error::duplicate_field("described"));
+                            }
+
+                            // Just disregard errors and set it to null
+                            let desc: Option<Description> = map.next_value().ok();
+
+                            described = Some(desc);
+                        }
+                        "licensed" => {
+                            if licensed.is_some() {
+                                return Err(de::Error::duplicate_field("licensed"));
+                            }
+
+                            // Just disregard errors and set it to null
+                            let lic: Option<License> = map.next_value().ok();
+
+                            licensed = Some(lic);
+                        }
+                        "files" => {
+                            if !files.is_empty() {
+                                return Err(de::Error::duplicate_field("files"));
+                            }
+
+                            files = map.next_value()?;
+                        }
+                        _ => { /* just ignore unknown fields */ }
+                    }
+                }
+
+                let coordinates =
+                    coordinates.ok_or_else(|| de::Error::missing_field("coordinates"))?;
+                let described = described.ok_or_else(|| de::Error::missing_field("described"))?;
+                let licensed = licensed.ok_or_else(|| de::Error::missing_field("licensed"))?;
+
+                Ok(Definition {
+                    coordinates,
+                    described,
+                    licensed,
+                    files,
+                })
+            }
+        }
+
+        const FIELDS: &[&str] = &["coordinates", "described", "licensed", "files"];
+        deserializer.deserialize_struct("Definition", FIELDS, DefVisitor)
+    }
 }
 
 /// Gets the definitions for the supplied coordinates, note that this method

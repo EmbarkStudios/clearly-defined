@@ -6,6 +6,10 @@ pub enum Error {
     Http(#[source] HttpError),
     #[error("HTTP status")]
     HttpStatus(#[source] HttpStatusError),
+    #[error("JSON error")]
+    Json(#[source] serde_json::Error),
+    #[error("other error")]
+    Other(String),
 }
 
 #[derive(Debug, thiserror::Error)]
@@ -35,5 +39,11 @@ impl fmt::Display for HttpStatusError {
 impl From<http::StatusCode> for Error {
     fn from(e: http::StatusCode) -> Self {
         Error::HttpStatus(HttpStatusError(e))
+    }
+}
+
+impl From<serde_json::Error> for Error {
+    fn from(e: serde_json::Error) -> Self {
+        Error::Json(e)
     }
 }

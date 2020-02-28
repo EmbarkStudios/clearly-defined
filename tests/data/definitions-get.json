@@ -1,0 +1,1302 @@
+{
+    "crate/cratesio/-/syn/1.0.14": {
+        "described": {
+            "releaseDate": "2020-01-20",
+            "sourceLocation": {
+                "type": "git",
+                "provider": "github",
+                "namespace": "dtolnay",
+                "name": "syn",
+                "revision": "855f331cf0e14916a1c3026786b59e6f6b6f2d6f",
+                "url": "https://github.com/dtolnay/syn/tree/855f331cf0e14916a1c3026786b59e6f6b6f2d6f"
+            },
+            "urls": {
+                "registry": "https://crates.io/crates/syn",
+                "version": "https://crates.io/crates/syn/1.0.14",
+                "download": "https://crates.io/api/v1/crates/syn/1.0.14/download"
+            },
+            "hashes": {
+                "sha1": "85b0fe2790310f9d6daf04393bc0cf266841d861",
+                "sha256": "af6f3550d8dff9ef7dc34d384ac6f107e5d31c8f57d9f28e0081503f547ac8f5"
+            },
+            "files": 83,
+            "tools": [
+                "clearlydefined/1.2.0",
+                "licensee/9.13.0",
+                "scancode/3.2.2"
+            ],
+            "toolScore": {
+                "total": 100,
+                "date": 30,
+                "source": 70
+            },
+            "score": {
+                "total": 100,
+                "date": 30,
+                "source": 70
+            }
+        },
+        "licensed": {
+            "declared": "Apache-2.0 AND MIT",
+            "toolScore": {
+                "total": 75,
+                "declared": 30,
+                "discovered": 0,
+                "consistency": 15,
+                "spdx": 15,
+                "texts": 15
+            },
+            "facets": {
+                "core": {
+                    "attribution": {
+                        "unknown": 83
+                    },
+                    "discovered": {
+                        "unknown": 78,
+                        "expressions": [
+                            "Apache-2.0",
+                            "MIT"
+                        ]
+                    },
+                    "files": 83
+                }
+            },
+            "score": {
+                "total": 75,
+                "declared": 30,
+                "discovered": 0,
+                "consistency": 15,
+                "spdx": 15,
+                "texts": 15
+            }
+        },
+        "files": [
+            {
+                "path": ".cargo_vcs_info.json",
+                "hashes": {
+                    "sha1": "1c22c20a2c1f7a6e4fe0f1e3aadce5f8eefd4f6b",
+                    "sha256": "328bc43210bab00c0bd5f5830c4826075fe76e4edfecc0b29ab57c69fd133706"
+                }
+            },
+            {
+                "path": "build.rs",
+                "hashes": {
+                    "sha1": "e58729c91f5fa640cdc10944579d803c47071451",
+                    "sha256": "2570006136c4fed9199b9c23c100a99e1be04d6c6a3e9630a6613a67baedf503"
+                }
+            },
+            {
+                "path": "Cargo.toml",
+                "license": "MIT",
+                "hashes": {
+                    "sha1": "1899056fa6ddaaf15a04d1e46a7406f21d767a92",
+                    "sha256": "9d30402fba492ff72a12ed5269dd3200b3b528e2d99406665049855e3764344d"
+                }
+            },
+            {
+                "path": "Cargo.toml.orig",
+                "license": "MIT",
+                "hashes": {
+                    "sha1": "02d19627d67a412121888c2a99fb57a67fa99ca2",
+                    "sha256": "2685f3206f2ccff9871343b79263a33756b3cb9ccdcf2f041f36108b32661028"
+                }
+            },
+            {
+                "path": "LICENSE-APACHE",
+                "license": "Apache-2.0",
+                "natures": [
+                    "license"
+                ],
+                "hashes": {
+                    "sha1": "5798832c31663cedc1618d18544d445da0295229",
+                    "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+                },
+                "token": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+            },
+            {
+                "path": "LICENSE-MIT",
+                "license": "MIT",
+                "natures": [
+                    "license"
+                ],
+                "hashes": {
+                    "sha1": "ce3a2603094e799f42ce99c40941544dfcc5c4a5",
+                    "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+                },
+                "token": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+            },
+            {
+                "path": "README.md",
+                "license": "MIT",
+                "hashes": {
+                    "sha1": "41bbda132263317c4f7f84dbde65a49d00cd1966",
+                    "sha256": "ca605417b6db8c995458f8407afaad6c177aedcc2274004283600f5638fa1b0c"
+                }
+            },
+            {
+                "path": "benches/file.rs",
+                "hashes": {
+                    "sha1": "c22da032a403e0b21b815139afc2b592c8f9e787",
+                    "sha256": "b4724fc7c0f48b8f488e2632a1064f6c0bf16ded3969680fc3f4a2369536269b"
+                }
+            },
+            {
+                "path": "benches/rust.rs",
+                "hashes": {
+                    "sha1": "3fdbad70f11aa78b8c34b23d897e4025d33d9b8a",
+                    "sha256": "3da09337cba12211ba4f819e7610b8bb4665bfc10281990dc90040da0c972077"
+                }
+            },
+            {
+                "path": "src/attr.rs",
+                "hashes": {
+                    "sha1": "cf805d6234bb98522a893579815f63f2bb9ff1f0",
+                    "sha256": "012b83798d0a9e556b3c5398519a9498a71ca41be9915fcdb7baa2125395393f"
+                }
+            },
+            {
+                "path": "src/await.rs",
+                "hashes": {
+                    "sha1": "de60f9cd9a114a8186fdbbec052e7a6f963bbeb1",
+                    "sha256": "18f0b2ecb319991f891e300011424985e3cf33d166ea9f29f22d575fc8c83a76"
+                }
+            },
+            {
+                "path": "src/bigint.rs",
+                "hashes": {
+                    "sha1": "9dcf2f9c24907df4d88062e405df70ea77379857",
+                    "sha256": "efc7f64959980653d73fe4f8bc2a3a2904dc05f45b02c6dc15cd316fa3d7c338"
+                }
+            },
+            {
+                "path": "src/buffer.rs",
+                "hashes": {
+                    "sha1": "efd5bfa6e589e4cee53e494dd26e4b878091fa1f",
+                    "sha256": "a0f8ad8ec5bf7892efded49d0265619be0cf61928a8b4f5c37ae1c7c2c018391"
+                }
+            },
+            {
+                "path": "src/custom_keyword.rs",
+                "hashes": {
+                    "sha1": "2152e0f0a444bf15243602393796b758f3088124",
+                    "sha256": "589e46ec1be9a04d6de12c0b8cadf87cc1c05606ed46ddea62e9869cbca4a191"
+                }
+            },
+            {
+                "path": "src/custom_punctuation.rs",
+                "hashes": {
+                    "sha1": "b3d428c9dbb0afc01fa2c1f307647175da96b0ad",
+                    "sha256": "2ba2e294e15a0fce7ede3686c42b2891797079a724dd1193b66e7d305624c891"
+                }
+            },
+            {
+                "path": "src/data.rs",
+                "hashes": {
+                    "sha1": "9627c1f8bf0de0c47a4b924109a721f3614467eb",
+                    "sha256": "a40fa2016e9d4e5583574d317afbb420bb81a8c0f5c7125869a356049effa551"
+                }
+            },
+            {
+                "path": "src/derive.rs",
+                "hashes": {
+                    "sha1": "8f98952e8981bfd3bd9552497b9a666b32eed67f",
+                    "sha256": "c18878f14be5d5ab11fd7dda2d2ff1ff75c9662daf11eed033de62e4d0670a89"
+                }
+            },
+            {
+                "path": "src/discouraged.rs",
+                "hashes": {
+                    "sha1": "6fccdfb44adf99163a118b2b4917700eb5118f99",
+                    "sha256": "217da4ea74a8eedd9bf8c6a8bce09288b3fcd5734424ced140150fd241a33618"
+                }
+            },
+            {
+                "path": "src/error.rs",
+                "hashes": {
+                    "sha1": "2dff3bb40819ef8e214e43338b5d17fcd8cb26d4",
+                    "sha256": "34eea71d9a83af61f574e734ac2e76b3e1179a004a3f67cb2a484ab48091f650"
+                }
+            },
+            {
+                "path": "src/export.rs",
+                "hashes": {
+                    "sha1": "b79338e2b7c7db3684c4485a9c9273717cfb49c1",
+                    "sha256": "dcae67456278c0339acfbcbb4737b8d37cfba5a150ae789f31f4be79abf7e726"
+                }
+            },
+            {
+                "path": "src/expr.rs",
+                "hashes": {
+                    "sha1": "98f8e7ece79560e6bb441ceb082b2beee9c8e913",
+                    "sha256": "11ce6bdcf6fad667c7d8b8e1cd8e46aa3febcc8a501629865156c0cf1a8d9865"
+                }
+            },
+            {
+                "path": "src/ext.rs",
+                "hashes": {
+                    "sha1": "a96b51cd00d47ae63aa2d3aa57ebbf4ef20a4853",
+                    "sha256": "b97ed549490b9248b5b5df31b3d5b08ba8791e23e6c5d3a1157a0363eb683ff3"
+                }
+            },
+            {
+                "path": "src/file.rs",
+                "hashes": {
+                    "sha1": "65c4316bfc0e6a676054151bfe7d0ccf582ef84e",
+                    "sha256": "3cc2bf5c709238d515a557f721f231c8c725b196400de051f945b549299d38a7"
+                }
+            },
+            {
+                "path": "src/gen_helper.rs",
+                "hashes": {
+                    "sha1": "bfa459ec0cf43367b1cb63e92158f1f49bfd11a3",
+                    "sha256": "ea6c66388365971db6a2fc86cbb208f7eacde77e245bc8623f27a3642a3d7741"
+                }
+            },
+            {
+                "path": "src/generics.rs",
+                "hashes": {
+                    "sha1": "eea88a2e3645f43e08a2562dcca9f6943f1e59c6",
+                    "sha256": "f4ab76eae15d2a3a645f411daaf30b697dde00a3e6fcd6eb1e604c4a01bd0381"
+                }
+            },
+            {
+                "path": "src/group.rs",
+                "hashes": {
+                    "sha1": "32dba78fc5fd15ecb9548515fdeab426047f4501",
+                    "sha256": "119b62d8481b4b1c327639bed40e114bf1969765250b68186628247fd4144b3b"
+                }
+            },
+            {
+                "path": "src/ident.rs",
+                "hashes": {
+                    "sha1": "3beb99c913892576203e932ec5fe0b9b09997887",
+                    "sha256": "503156ce51a7ef0420892e8dbf2ecf8fe51f42a84d52cc2c05654e1a83020cbf"
+                }
+            },
+            {
+                "path": "src/item.rs",
+                "hashes": {
+                    "sha1": "ea531757c3a149bf310e3aebd33a2c9827b9c035",
+                    "sha256": "f10c64ba05cf6f338930d9f55571b95ced5d13b394b7c1911cc11645e65c4ace"
+                }
+            },
+            {
+                "path": "src/lib.rs",
+                "hashes": {
+                    "sha1": "b24735be67f1d47f19a333f3d101ec9c0a21ba73",
+                    "sha256": "ed6881a5f4f8ace42db1aa8c8ee6107291003e3518b05ba9ee9703d3c8ecdb21"
+                }
+            },
+            {
+                "path": "src/lifetime.rs",
+                "hashes": {
+                    "sha1": "21912bc6e5d832c92062c8c0dbfc3ef873334239",
+                    "sha256": "905359708f772ec858954badde69ee016d29e6eeba1dd205b268445b1aff6f3a"
+                }
+            },
+            {
+                "path": "src/lit.rs",
+                "hashes": {
+                    "sha1": "ada3a28b12940601d4c95f7e2c3d441382dd8090",
+                    "sha256": "074a0f090d39a104a68d7b55134f6354ed486fcce868302b7f0f6cea099ac211"
+                }
+            },
+            {
+                "path": "src/lookahead.rs",
+                "hashes": {
+                    "sha1": "0fe50b657897e498d550790b4cfa30f0ac293bd5",
+                    "sha256": "5cce8b4cb345a85c24a452ea6d78eadb76f01ca0a789cbf5ce35108334904173"
+                }
+            },
+            {
+                "path": "src/mac.rs",
+                "hashes": {
+                    "sha1": "8bd319da8cebc8ffb7b344ab8cd0f477f1d90847",
+                    "sha256": "6b468244cc07e3f2f10419f833d9e2ed23edbcd6dc34cf21c5947633699db964"
+                }
+            },
+            {
+                "path": "src/macros.rs",
+                "hashes": {
+                    "sha1": "d6a5b3a9d42630c0b0e10d320da734b8e1a95985",
+                    "sha256": "3927364fdcf46bfebef97cf29f4b1a0c862484980707e714c4a572c5f7261065"
+                }
+            },
+            {
+                "path": "src/op.rs",
+                "hashes": {
+                    "sha1": "f0815616ec9e9881eadf89b1c9e1759fb2514a8e",
+                    "sha256": "93cd44770bb110deadf807a01d9a666efe644b6e3010f4b51cae77ee7438cfbb"
+                }
+            },
+            {
+                "path": "src/parse.rs",
+                "hashes": {
+                    "sha1": "1795a7486bc86f955fc5ca16f37449bed827aa49",
+                    "sha256": "7612fb05c480a829b8b83e4cd50824478598c109e57268162995f4a7c66303bc"
+                }
+            },
+            {
+                "path": "src/parse_macro_input.rs",
+                "hashes": {
+                    "sha1": "339674b4d13882a639d5971c183bfa36f2436a46",
+                    "sha256": "f799aadb7216c2d333b579f48ed2fedfe07b5e96f004b25b569649ffbaa958d2"
+                }
+            },
+            {
+                "path": "src/parse_quote.rs",
+                "hashes": {
+                    "sha1": "74c89a5c15b67451bf4fb1c8c6725e38add64328",
+                    "sha256": "969070e8690afbe18b898341775c5406be5330c70a54385715d5d48e1ada7aae"
+                }
+            },
+            {
+                "path": "src/pat.rs",
+                "hashes": {
+                    "sha1": "1a0fac1f78483695ccd1cd5750fb93dbe91e2e2e",
+                    "sha256": "67d6733138f0f5d1dc56e344246b9ea9e1fb263d2f3165922271216865c6df2c"
+                }
+            },
+            {
+                "path": "src/path.rs",
+                "hashes": {
+                    "sha1": "856d07a68e2f821fc8cb5ad5f8debfa954c8aa7b",
+                    "sha256": "32e685ac7fd2d4b9989802de8f326a8d47fa710f86ec3e45fd9d3ff8fdfe97ef"
+                }
+            },
+            {
+                "path": "src/print.rs",
+                "hashes": {
+                    "sha1": "2b2cf8770ec55d82db09a16597197666552230cd",
+                    "sha256": "da6529c1d9d21aaf6c835f66b4e67eacb7cf91a10eb5e9a2143b49bf99b3b5e1"
+                }
+            },
+            {
+                "path": "src/punctuated.rs",
+                "hashes": {
+                    "sha1": "81a248dc8a5f40fdd9ef226ed97817e0cefc6abe",
+                    "sha256": "384e7b317b26f24118eb4b0c39e949ee9f4f3e700a4c80e462342c83b2cc3282"
+                }
+            },
+            {
+                "path": "src/sealed.rs",
+                "hashes": {
+                    "sha1": "cb3cebec58169975d3b5b3412cc96fb3d136ddd0",
+                    "sha256": "896a495a5340eec898527f18bd4ddca408ea03ea0ee3af30074ff48deace778d"
+                }
+            },
+            {
+                "path": "src/span.rs",
+                "hashes": {
+                    "sha1": "8aff5c8b28bf6582bbb8cbacff827ff4b23d5521",
+                    "sha256": "748c51c6feb223c26d3b1701f5bb98aee823666c775c98106cfa24fe29d8cec1"
+                }
+            },
+            {
+                "path": "src/spanned.rs",
+                "hashes": {
+                    "sha1": "5ea71c8c64129703d512a7cf0d9a1c945182419d",
+                    "sha256": "adddb6acae14a0fa340df302b932c31e34b259706ce56fd82ab597ec424500e1"
+                }
+            },
+            {
+                "path": "src/stmt.rs",
+                "hashes": {
+                    "sha1": "99c418a84c206c30d3589f9acb5f7f19cbde9d68",
+                    "sha256": "dcb7c8c2797fc1994005c938925516236d26becc42fc7af3dc5cb96068ce32bd"
+                }
+            },
+            {
+                "path": "src/thread.rs",
+                "hashes": {
+                    "sha1": "23dad76d269fcaf918d372d742d2243a276391e9",
+                    "sha256": "815eca6bd64f4eef7c447f0809e84108f5428ff50225224b373efd8fbb696874"
+                }
+            },
+            {
+                "path": "src/token.rs",
+                "hashes": {
+                    "sha1": "43787c0f23518fa8ce5cde42fd4e279efba8c8b5",
+                    "sha256": "4447d4e9880efd1226efd98cb2951ebb42ebee4146df175607f78194260bdd6b"
+                }
+            },
+            {
+                "path": "src/tt.rs",
+                "hashes": {
+                    "sha1": "c59ff97fd9e005db21f0ce46fe08e183f4c26d39",
+                    "sha256": "1cc9e200624288322f800f32e3d6e2e53da946467bb312dd40a52c02cdcc4730"
+                }
+            },
+            {
+                "path": "src/ty.rs",
+                "hashes": {
+                    "sha1": "e53f595b1751053eb975ddc7dadecb25dd53bcf1",
+                    "sha256": "289e772d75e4b60bc3463eb024eaa2ec48fd1eaa7fe1f4ff250a199efdc9a35c"
+                }
+            },
+            {
+                "path": "src/gen/fold.rs",
+                "hashes": {
+                    "sha1": "c62ddfa6e632b4e2b2c1946650dedc14006fda8a",
+                    "sha256": "10b3ae33d0ce410d6bbe8b93be9d5f9e856c7dc8212133cc46b703f97d548190"
+                }
+            },
+            {
+                "path": "src/gen/visit.rs",
+                "hashes": {
+                    "sha1": "bc5fd14e646623ba45a35e9187f310dc121a88cf",
+                    "sha256": "e0f5798552d186024696b7bfc7219d4ff53b0e45f735a83e77cbb6b6578c5fa4"
+                }
+            },
+            {
+                "path": "src/gen/visit_mut.rs",
+                "hashes": {
+                    "sha1": "d1f002f6c12af801c5e54b9231a4649c61d32198",
+                    "sha256": "9f7dda83907969971dba84d545aaa563b0728e54db97ffab5050fdf43a79c731"
+                }
+            },
+            {
+                "path": "tests/test_asyncness.rs",
+                "hashes": {
+                    "sha1": "42a55bcc682ba9a569cccbc8427ece80316116b1",
+                    "sha256": "a033b1c76745573d8c180c5330a4bcf52833b2cc6db3171b714c36df49a16a10"
+                }
+            },
+            {
+                "path": "tests/test_attribute.rs",
+                "hashes": {
+                    "sha1": "3c86a256ba4c1492b645308317484f4c7731405a",
+                    "sha256": "b0398fa8bf879a31c73e1d976888114e8cb5a43a8e234ccf1c9d2c3bd47ac4e7"
+                }
+            },
+            {
+                "path": "tests/test_derive_input.rs",
+                "hashes": {
+                    "sha1": "6c29d36a9b036f0737d0212393bbbe696d323c65",
+                    "sha256": "3c05afd38940e4d0657fc139cd6f0dc6fe2dd88bb7e57e021aed0f892f2ab42c"
+                }
+            },
+            {
+                "path": "tests/test_expr.rs",
+                "hashes": {
+                    "sha1": "6ab4690923e386e2063984e545d625e380b841bb",
+                    "sha256": "41a78618ba7f96f109954b00b28f450d937ed236db37d212f8835dc0b0c50856"
+                }
+            },
+            {
+                "path": "tests/test_generics.rs",
+                "hashes": {
+                    "sha1": "ad696edfc97b331e1ffba269f4cac69d37545463",
+                    "sha256": "5a3d0ae89e8d10500ba7b9b64dbe537bf444bf9802afffe097cd4ca1305c0598"
+                }
+            },
+            {
+                "path": "tests/test_grouping.rs",
+                "hashes": {
+                    "sha1": "99372b1a2a6cdffff0b85e02355be9342d07539f",
+                    "sha256": "5dcce6a51a21e1d744189936e15b4c22756a293cac9f7e8f6f4db2f4ec2bdec7"
+                }
+            },
+            {
+                "path": "tests/test_ident.rs",
+                "hashes": {
+                    "sha1": "11d48719bc19865a0a0796b2ec59eb36f34aad62",
+                    "sha256": "5ece93cfe255d6bd7816b48329717d770cbaa4b0df53a9d4f8e689b117dc6928"
+                }
+            },
+            {
+                "path": "tests/test_iterators.rs",
+                "hashes": {
+                    "sha1": "e448d3343059b2756ae557a69e5aaedd3c433289",
+                    "sha256": "a635decf6db2d4ca3ba932033312fbafdbc210e8a56d95c28874fb632a4270a5"
+                }
+            },
+            {
+                "path": "tests/test_lit.rs",
+                "hashes": {
+                    "sha1": "0d6081392bcb4107b8969061fa639783018e7b76",
+                    "sha256": "f1a510827d3b322f2d32d16cd910025d5f3b79a1f579f31c8d2e84a93cfbe508"
+                }
+            },
+            {
+                "path": "tests/test_meta.rs",
+                "hashes": {
+                    "sha1": "66b14b61ad2341b3f4c01c7896095e309c2c078c",
+                    "sha256": "4df9768a51f01384e06278f313b3f823b9118cdc587cc1fccc8a4edfa97430d1"
+                }
+            },
+            {
+                "path": "tests/test_parse_buffer.rs",
+                "hashes": {
+                    "sha1": "6076c852f833188e3a3bdc78e6a0bf9162654125",
+                    "sha256": "f34ac01634f7712345f30ae12b9532c8af911bc9874c01af0c6d212937fead36"
+                }
+            },
+            {
+                "path": "tests/test_pat.rs",
+                "hashes": {
+                    "sha1": "0af8fafd9c40ad37f39b537cc58c7632a2c14680",
+                    "sha256": "3a53153a69277fe0f8f9040a40adf6b92408c9468cbed99c3ff38513d1c0a28a"
+                }
+            },
+            {
+                "path": "tests/test_precedence.rs",
+                "hashes": {
+                    "sha1": "1fe84b51f835b8d8411414240709513041181812",
+                    "sha256": "0dd6dd17b67decabe2d829da7309455007344e3ab733890b9787ba322920b018"
+                }
+            },
+            {
+                "path": "tests/test_receiver.rs",
+                "hashes": {
+                    "sha1": "d7b16fd8fd855488ae4fd1d01ba245907d30192a",
+                    "sha256": "1dd356649ca9c0a9cf2e9303a47edce18ce7c3883db1c52097b646cbfef7741f"
+                }
+            },
+            {
+                "path": "tests/test_round_trip.rs",
+                "hashes": {
+                    "sha1": "af68476cdfa5a0fbdfb7300c14dadaf771d91d51",
+                    "sha256": "6ae5d75f9852803af11c496f713b43c287ce2546a0c1d54e4a3c012f3ed30263"
+                }
+            },
+            {
+                "path": "tests/test_should_parse.rs",
+                "hashes": {
+                    "sha1": "7dbd04d5aae78f9841ccd9d4da16d3a98e7f5ae9",
+                    "sha256": "1943c8196529adf3250684c88fd68626d2db04b9be608974877f1485e350ffaf"
+                }
+            },
+            {
+                "path": "tests/test_size.rs",
+                "hashes": {
+                    "sha1": "9642163d1a04a45ea3ed640687a65b3cf551451d",
+                    "sha256": "970150b9d49ef91ab4c8f8c6a59b83f9a68a02acb779f0280733a5efaec6487a"
+                }
+            },
+            {
+                "path": "tests/test_token_trees.rs",
+                "hashes": {
+                    "sha1": "7627a1de7cd2bceb83a5da5f6c11623030aa26e1",
+                    "sha256": "f76a551ec9efe0b8b03637fa09e67670496a21fba8ce390dfe9469df12637c55"
+                }
+            },
+            {
+                "path": "tests/test_visibility.rs",
+                "hashes": {
+                    "sha1": "910c52f3d4a714788cf12fabfd11982066fb0c13",
+                    "sha256": "a7a975de1aa9b875920cd3617d8c20e72aa8dbf68e42d968eb14ff3eb7fbd878"
+                }
+            },
+            {
+                "path": "tests/zzz_stable.rs",
+                "hashes": {
+                    "sha1": "a0f2583b2e4a4e32f26ce3dfe2d63c2ab17d72a6",
+                    "sha256": "8df34596b31c572dfaa778e529b43178bddafa85ace32035bcb3b6cae3a4aa85"
+                }
+            },
+            {
+                "path": "tests/common/eq.rs",
+                "hashes": {
+                    "sha1": "481b116b436e57b4ec111b972353a34f5af277cf",
+                    "sha256": "add7327da64dba02f9412c81f7d114a79235bde96c40301620ae17f464c30a03"
+                }
+            },
+            {
+                "path": "tests/common/mod.rs",
+                "hashes": {
+                    "sha1": "b261fde2088ab6eb8d849f405d08b0974581ffa7",
+                    "sha256": "f0f9d55e901ae6c034cb1cb3c3132f431765cd808fd7fb10bafcbb0f648cab92"
+                }
+            },
+            {
+                "path": "tests/common/parse.rs",
+                "hashes": {
+                    "sha1": "9d82194aef371029c1dc12d4a4036a34545e948e",
+                    "sha256": "1be19dc402b21dacb06629f6af8f27ea922fe780a0921ab85b171f25efa7bc76"
+                }
+            },
+            {
+                "path": "tests/debug/gen.rs",
+                "hashes": {
+                    "sha1": "a653230e20d1ed670697c52c3996d43439a52793",
+                    "sha256": "57bd5cf585e0b86ad00f29f09ff3db3390c4a756d503514a9b28407500dcea3c"
+                }
+            },
+            {
+                "path": "tests/debug/mod.rs",
+                "hashes": {
+                    "sha1": "529ae1c084777fb935dfc61b70582088e2a72dae",
+                    "sha256": "6a181fb5040223022e4b14195e8e7c02e74a434dbf0a4912c5e39c675ee1a89f"
+                }
+            },
+            {
+                "path": "tests/features/error.rs",
+                "hashes": {
+                    "sha1": "4a9e182fb6872a382c0e9e0fced25c25dce8824b",
+                    "sha256": "e0581a2869cbd237c2bc18a0a85272296e1577bb5f7317a67fa85e28e04eea6f"
+                }
+            },
+            {
+                "path": "tests/features/mod.rs",
+                "hashes": {
+                    "sha1": "f6522b53c256b0a1995d255144531f033daba75f",
+                    "sha256": "66a2605ec54ede29208da350f2bed536dfa763b58408d64d3fca3b13de64b64f"
+                }
+            },
+            {
+                "path": "tests/macros/mod.rs",
+                "hashes": {
+                    "sha1": "a0e02988f37195077ca29071c85625f098ffdfca",
+                    "sha256": "c0eafa4e3845fc08f6efe6021bac37822c0ac325eb7b51194a5f35236f648d92"
+                }
+            },
+            {
+                "path": "tests/repo/mod.rs",
+                "hashes": {
+                    "sha1": "031e440cecfead4b94e7672c937eec5ed2610740",
+                    "sha256": "abd8bd57efea36831d13d31d9db3ada1c8b7579bfd23b25bfd52e9bd58280bd8"
+                }
+            },
+            {
+                "path": "tests/repo/progress.rs",
+                "hashes": {
+                    "sha1": "7582f4c7a2403fe286214eec7efffb57beaff9b0",
+                    "sha256": "c08d0314a7f3ecf760d471f27da3cd2a500aeb9f1c8331bffb2aa648f9fabf3f"
+                }
+            }
+        ],
+        "coordinates": {
+            "type": "crate",
+            "provider": "cratesio",
+            "name": "syn",
+            "revision": "1.0.14"
+        },
+        "_meta": {
+            "schemaVersion": "1.6.1",
+            "updated": "2020-01-23T00:25:22.433Z"
+        },
+        "scores": {
+            "effective": 87,
+            "tool": 87
+        }
+    },
+    "crate/cratesio/-/tokio/0.1.15": {
+        "licensed": {
+            "declared": "MIT",
+            "toolScore": {
+                "total": 75,
+                "declared": 30,
+                "discovered": 0,
+                "consistency": 15,
+                "spdx": 15,
+                "texts": 15
+            },
+            "facets": {
+                "core": {
+                    "attribution": {
+                        "unknown": 67,
+                        "parties": [
+                            "Copyright (c) 2019 Tokio"
+                        ]
+                    },
+                    "discovered": {
+                        "unknown": 64,
+                        "expressions": [
+                            "MIT"
+                        ]
+                    },
+                    "files": 68
+                }
+            },
+            "score": {
+                "total": 75,
+                "declared": 30,
+                "discovered": 0,
+                "consistency": 15,
+                "spdx": 15,
+                "texts": 15
+            }
+        },
+        "files": [
+            {
+                "path": "README.md",
+                "license": "MIT",
+                "hashes": {
+                    "sha1": "f361efc56e3c060a59e19090e6ce3ac4668a7f23",
+                    "sha256": "0aa7b500082f147c74ef094e1c6e54b53f2bc29912b1ea2ec6e6eeff5a8691ab"
+                }
+            },
+            {
+                "path": "src/codec/mod.rs",
+                "hashes": {
+                    "sha1": "f8809ab3ef02c5e852c32bb9b06ba992f4b6793c",
+                    "sha256": "249941c50f38b56aaac0688db0100b07b04bc038e759aae87dee9f3e26c986d8"
+                }
+            },
+            {
+                "path": "src/runtime/current_thread/mod.rs",
+                "hashes": {
+                    "sha1": "706bedf9ca6a133e460f022357ae9481fc48c37e",
+                    "sha256": "7dd217f2d434a3e15cc5bc3140891f4a6d5b272c7c46f5a12fb03322f849f8b4"
+                }
+            },
+            {
+                "path": "src/runtime/current_thread/builder.rs",
+                "hashes": {
+                    "sha1": "663a61726c197c1fd3faa56189f47f8c866f940b",
+                    "sha256": "30f1dae794e0db2b4263eb1e96b71c12c91fc08d2845cbb7cb540cd31a3b1612"
+                }
+            },
+            {
+                "path": "src/runtime/threadpool/task_executor.rs",
+                "hashes": {
+                    "sha1": "305bd4268a9e56ca1db31a36865dbe0ca1bfd08f",
+                    "sha256": "8c6b122116a18377d6bda4c8778b37e4f8b91fc2a73b9511a1ff63d34264c293"
+                }
+            },
+            {
+                "path": "src/runtime/threadpool/builder.rs",
+                "hashes": {
+                    "sha1": "75cb17c60136ba57096ac1c376eebf20fcf9fd3d",
+                    "sha256": "684d6249f496bc5bb34257c1da95bb0be70b72e9a166abc7e038c912f56027b3"
+                }
+            },
+            {
+                "path": "src/lib.rs",
+                "hashes": {
+                    "sha1": "1838971358122eadd77c295156c0f16e82811b42",
+                    "sha256": "111bc7ca8e1c3e5ad386e40f554c57f6f7bdf1e5807479074c2b81a72db5daab"
+                }
+            },
+            {
+                "path": "src/io.rs",
+                "hashes": {
+                    "sha1": "d0c141e5a4bf32a463059cbbb7e190ebc8b23d4b",
+                    "sha256": "414a102a4abffc97b2e524c5a2ea86c226738d8e93f5da6b8f5bbdc093c15481"
+                }
+            },
+            {
+                "path": "src/util/mod.rs",
+                "hashes": {
+                    "sha1": "b4b2b87242b6d73525ba7046a1d0f2de5b303569",
+                    "sha256": "dda10953f95e2d4ebf7ba33e3ab90cb587ba3685f6fb57815a24e9641c60e13b"
+                }
+            },
+            {
+                "path": "src/util/future.rs",
+                "hashes": {
+                    "sha1": "038bfd6de38f3481997f4b1def4f5f9f5545d96d",
+                    "sha256": "4d1428fb50cf5ef857e3838de26567c189f736a3e256eac02e2cd05112821c1f"
+                }
+            },
+            {
+                "path": "src/fs.rs",
+                "hashes": {
+                    "sha1": "6015689d7eb17b5bf260109998f000c4bdf46a06",
+                    "sha256": "1a4dd1c0eacabfb22661174b2f1441bdce6941cd61ccd24b61d02cf3cbf339a3"
+                }
+            },
+            {
+                "path": "src/reactor/poll_evented.rs",
+                "hashes": {
+                    "sha1": "60093f89f79d81a955fba0d02997cfdbc7936d50",
+                    "sha256": "6d1233e82ebdefe42c63c3bbca839d99aab5873aeca2bb11787660ecd39ad2f9"
+                }
+            },
+            {
+                "path": "src/timer.rs",
+                "hashes": {
+                    "sha1": "40003fa5d4db2fc18daa36153d470dc8ab2f82e8",
+                    "sha256": "4ffd3244dad044bd0025c2bb1cf8710ae00a5136787a266c3f04a3010daed37f"
+                }
+            },
+            {
+                "path": "src/executor/mod.rs",
+                "hashes": {
+                    "sha1": "87f2d4f869b12e81407c6e0701b872e6eb5ef2ce",
+                    "sha256": "418807abde295d8f728c027a8426d2bd702a6a93a73242a64c2adeb92c7cef12"
+                }
+            },
+            {
+                "path": "src/async_await.rs",
+                "hashes": {
+                    "sha1": "37191772922285d859b53138bb47da5deb8c7e51",
+                    "sha256": "a23eea1f6d1ac20248f4cd38bb1782a576775c81e0493d8fe8423478f0fa64e0"
+                }
+            },
+            {
+                "path": ".github/ISSUE_TEMPLATE.md",
+                "hashes": {
+                    "sha1": "8d072f59f4c64d21aba2087926df3418ebf46085",
+                    "sha256": "d19ccaf4867cc7445b46fa788fe7b882039a4662281e618f6d296cea4655d6e2"
+                }
+            },
+            {
+                "path": ".appveyor.yml",
+                "hashes": {
+                    "sha1": "3cd76a7e623cb5aa4c755561f26b96974d834360",
+                    "sha256": "bdd6d192c8b9fdc61c4051268bc1acc275e2c8faf4267e1908912f2852981a2a"
+                }
+            },
+            {
+                "path": ".gitignore",
+                "hashes": {
+                    "sha1": "3254b5d5538166f1fd5a0bb41f7f3d3bbd455c56",
+                    "sha256": "f9b1ca6ae27d1c18215265024629a8960c31379f206d9ed20f64e0b2dcf79805"
+                }
+            },
+            {
+                "path": "tests/reactor.rs",
+                "hashes": {
+                    "sha1": "fa961aa1bed17f3aa2ff7d6ae91a1c86932f33ff",
+                    "sha256": "179556b37cb99a25579ec438a5d1233f259501dc2687939a65a062dc5b22c9a9"
+                }
+            },
+            {
+                "path": "tests/pipe-hup.rs",
+                "hashes": {
+                    "sha1": "e688f431d39f8c63f13256706fc7ffd9f3b99f41",
+                    "sha256": "4b73016172ee8ee9c81cb9f92c786a3efb28e6649fcbc897a5c15b2d36ac9d1b"
+                }
+            },
+            {
+                "path": "tests/line-frames.rs",
+                "hashes": {
+                    "sha1": "e02ecde133c145f1edd4f8323dc57e26d2e70b8f",
+                    "sha256": "858849c9d260349a83289d6ae8ad7e1bc4c438bb0a89f2030b869d99e826c6f1"
+                }
+            },
+            {
+                "path": "tests/timer.rs",
+                "hashes": {
+                    "sha1": "addbd8ad7ba5de4b4d252388d3cda6fb7d1003de",
+                    "sha256": "10a5b654afd7cebf3927aab4cf29891f0e40cf01d08eed01082c14c5f2ac8ac4"
+                }
+            },
+            {
+                "path": "tests/length_delimited.rs",
+                "hashes": {
+                    "sha1": "596fad5da2c6d78809c0202ba83f8a5633ed64ca",
+                    "sha256": "cf3a788afd7212a1add04c4fa8953bf18476dcf462e0e5de005c54b8ffb18bff"
+                }
+            },
+            {
+                "path": "CHANGELOG.md",
+                "hashes": {
+                    "sha1": "7859bb8b55d25062d85654a74054198246add6d8",
+                    "sha256": "6bc35df189afc8488fd33826acbbceb0618b853fc5f61676dd4b5bdaab31e078"
+                }
+            },
+            {
+                "path": "benches/latency.rs",
+                "hashes": {
+                    "sha1": "c2eee371d8d90293d1268d561314b15e2a077afa",
+                    "sha256": "b8f62578cf5784efa201549535e2a0d3bda78d78cf24d2be662851c35a1339df"
+                }
+            },
+            {
+                "path": "benches/mio-ops.rs",
+                "hashes": {
+                    "sha1": "8b06c798454b84ea07f77d72ae112fcb87e6ab05",
+                    "sha256": "0df1a47f9bb3c8ed4291244da8c39d956b7a23cad9be7b2a5009fa58d39f8330"
+                }
+            },
+            {
+                "path": "examples/README.md",
+                "hashes": {
+                    "sha1": "8e6d4fa3fbd64cf8e9aba49498f86a043ce37913",
+                    "sha256": "c976ccc5c8b44caf31ef3a1c5ac13605898e087bc9b5f7e5a7ac9e8c44157a99"
+                }
+            },
+            {
+                "path": "examples/tinyhttp.rs",
+                "hashes": {
+                    "sha1": "6212a34474693729d2bac3bb34a94cba1ba5a1f9",
+                    "sha256": "2e017e0e47c6e43e5c5268ad2b9ee00c6f5833bd6511e8add3014f03ad69d32e"
+                }
+            },
+            {
+                "path": "examples/connect.rs",
+                "hashes": {
+                    "sha1": "8467554ff8a61994ad1b876027df02b4575a3777",
+                    "sha256": "0e2c9745139dc0b5ad62f2058ca514611f436afd53287d52cc42f53c8a195b35"
+                }
+            },
+            {
+                "path": "examples/chat.rs",
+                "hashes": {
+                    "sha1": "78eefd0815b16a6b6c10efddfa96f0bfaf5aa2b0",
+                    "sha256": "f2c42440508751ac228d24dc745ffc6614770d220a1e2c4646be37d17ee90821"
+                }
+            },
+            {
+                "path": "examples/echo.rs",
+                "hashes": {
+                    "sha1": "8c63fe3d18dbb0383d09d1270c0e96df0bd9b6b7",
+                    "sha256": "338e3f2d73f89518332fdfce3e0d2832fc0a5994008e12dd4a4de68ef2f852b0"
+                }
+            },
+            {
+                "path": "examples/print_each_packet.rs",
+                "hashes": {
+                    "sha1": "1273df7f9369bf4a8eb33bcdc6cddfd61269b78e",
+                    "sha256": "1aeb7d075646023667299403ed1eb90f3686ec994848ada62d624ed9bd3722d5"
+                }
+            },
+            {
+                "path": "examples/chat-combinator.rs",
+                "hashes": {
+                    "sha1": "edb3de9cdc4a9f2623667aed136a82feede2a2c3",
+                    "sha256": "0a44e25ef7bca671c18f6484fb69ac0e6f581c4245a64a98b3c57d8a5fe576a7"
+                }
+            },
+            {
+                "path": "ci/tsan",
+                "hashes": {
+                    "sha1": "de58caff28c04b2350970560c5574331b35cd89c",
+                    "sha256": "71d1675dce0b6ab3c7eb078dfb38330cf27bce0dffae92194eb7e287133ee2ac"
+                }
+            },
+            {
+                "path": "Cargo.toml.orig",
+                "license": "MIT",
+                "hashes": {
+                    "sha1": "f7565e0d99e2bdaeb825a8747608cba70cb30462",
+                    "sha256": "83788be6fafecca486c87ae4b1afaa87cf211bdbcf76a17b8a955d99d6519d28"
+                }
+            },
+            {
+                "path": "LICENSE",
+                "license": "MIT",
+                "attributions": [
+                    "Copyright (c) 2019 Tokio"
+                ],
+                "hashes": {
+                    "sha1": "3c8e7847ca19c2bb00f4100c725810c04a1b56d6",
+                    "sha256": "898b1ae9821e98daf8964c8d6c7f61641f5f5aa78ad500020771c0939ee0dea1"
+                },
+                "natures": [
+                    "license"
+                ],
+                "token": "898b1ae9821e98daf8964c8d6c7f61641f5f5aa78ad500020771c0939ee0dea1"
+            },
+            {
+                "path": "src/codec/length_delimited.rs",
+                "hashes": {
+                    "sha1": "dcff18370afdb2bf0bdb275050916a3da02d73b7",
+                    "sha256": "dc1481597124deddb797be8490cd9b4d12964127f5743105148708bff9b0489a"
+                }
+            },
+            {
+                "path": "src/runtime/current_thread/runtime.rs",
+                "hashes": {
+                    "sha1": "9a27ca5a75e9f8544e89399a0d13031d962e01e3",
+                    "sha256": "7e315ade49dcaa86811188e912ee64c80e55a3126e873deb6a2a51323e0616c6"
+                }
+            },
+            {
+                "path": "src/runtime/threadpool/mod.rs",
+                "hashes": {
+                    "sha1": "d7d9623f0880bd199379505267c792ab7aa34f10",
+                    "sha256": "c980eef2a3d035fe5fcb3a595fa9fa4259968098101203e39c010443246efb00"
+                }
+            },
+            {
+                "path": "src/runtime/threadpool/shutdown.rs",
+                "hashes": {
+                    "sha1": "720f90dc7e21e9ef9f8026de84eca2a4cabfecc3",
+                    "sha256": "51ddd3de76afeff7aad793387994ca81afc65483e8f75585df53404ebad7a5d2"
+                }
+            },
+            {
+                "path": "src/runtime/mod.rs",
+                "hashes": {
+                    "sha1": "dfd7728cbb6f78a03c2bf87a5a19e8bd8498e982",
+                    "sha256": "e2af2db2e2c6cfd15728f8b0ef2bc1ad5b3b6c3c128b0ce7e3cbb275480bc0e2"
+                }
+            },
+            {
+                "path": "src/net.rs",
+                "hashes": {
+                    "sha1": "53adb23a1097538799ede345ab706ef50adadf9e",
+                    "sha256": "f16936e7cfa5f4b138776f88d7d9f5f86d76c4d81f06ac2c97e9dd019679730a"
+                }
+            },
+            {
+                "path": "src/util/stream.rs",
+                "hashes": {
+                    "sha1": "3a7ed10c90f22beb85e48bae7a907acdcd71952f",
+                    "sha256": "06bfb29eba888a326f5977801c92dba28148b95938c663dafeea9c59ffbadbef"
+                }
+            },
+            {
+                "path": "src/util/enumerate.rs",
+                "hashes": {
+                    "sha1": "723cdda587e9367390741c02bf0e3b5e126085cd",
+                    "sha256": "a2fb2f1c95cf65e77eec319d942c36539364b4e5373dceacaacc5dbe6f318cb3"
+                }
+            },
+            {
+                "path": "src/sync.rs",
+                "hashes": {
+                    "sha1": "3602b1cfe9a87546870627c1889c2c6a7b3e2dd4",
+                    "sha256": "da502e59cbe57e39201324e7889fa3d57cfff1aebaa240fa4fd2b6e4730d2a7d"
+                }
+            },
+            {
+                "path": "src/reactor/mod.rs",
+                "hashes": {
+                    "sha1": "1ee71c3d434a19bc3ffac645d6b857fbf0ff709e",
+                    "sha256": "9b68b4d1aabe99b2e851e2f98135c35a891825a7017dc835e4d3de3c5f162bd5"
+                }
+            },
+            {
+                "path": "src/prelude.rs",
+                "hashes": {
+                    "sha1": "de13d614fe54c70c540a06dc1a1f7683c6ecf15f",
+                    "sha256": "0981eded4106e9ba09067d0237e0358f62cfa6d020300bf98455bc00b4f21051"
+                }
+            },
+            {
+                "path": "src/executor/current_thread/mod.rs",
+                "hashes": {
+                    "sha1": "e25832d8daf87a44ce50d166e03a4b12daf7f8c9",
+                    "sha256": "c6f183735fda8f2081e88960eaf10e7e9435fa7f9e3db118626f55366e22094f"
+                }
+            },
+            {
+                "path": "src/clock.rs",
+                "hashes": {
+                    "sha1": "a90aa190af39cf030bffe981d709f3c9d87a6329",
+                    "sha256": "ad45adb859163b40a51e566e0e53abff8682c8bbb7813fd106aa70ea55efe5f3"
+                }
+            },
+            {
+                "path": ".github/PULL_REQUEST_TEMPLATE.md",
+                "hashes": {
+                    "sha1": "ecc4bc1a9d039e0521708df4a26259a3183c1947",
+                    "sha256": "d8f9491de2c16142da3ab4920ea360bc72b41a2eb33ab389b4685b23ad6f69e2"
+                }
+            },
+            {
+                "path": "Cargo.toml",
+                "license": "MIT",
+                "hashes": {
+                    "sha1": "e1e7ca8a1eca54b3b83befaf33728082345dbc4a",
+                    "sha256": "fa7a42f5de7348014a43cd3afd722c6b569884f13f76b60c1329a3f2fdf351c8"
+                }
+            },
+            {
+                "path": ".travis.yml",
+                "hashes": {
+                    "sha1": "575d08fc196d422581fb5ccf768b63fb9ac4847b",
+                    "sha256": "e778eae18d13418dc307cb94fccee9bd747c4994f3f0eba7812bde49469f878d"
+                }
+            },
+            {
+                "path": "tests/drop-core.rs",
+                "hashes": {
+                    "sha1": "739f58cf82d7004fd210bafc9cd97cdc48294032",
+                    "sha256": "9a074dd521840d28e5c740a767aaae4c957614901a7f4c6b330cc1560ef50fd9"
+                }
+            },
+            {
+                "path": "tests/enumerate.rs",
+                "hashes": {
+                    "sha1": "7139cbf44dd9cfa9857127a10437d8e0e8c156fa",
+                    "sha256": "625636df09351dfb70e935022c1b0b81cb1a18fe04d1a24d67828bac33fde195"
+                }
+            },
+            {
+                "path": "tests/runtime.rs",
+                "hashes": {
+                    "sha1": "84a1738a92281dceb203d043da19a3ed7c26f373",
+                    "sha256": "4d02f96317693db7bde17f035c52866ab3469b3d5c306ca9c4c2c3389c9944a1"
+                }
+            },
+            {
+                "path": "tests/buffered.rs",
+                "hashes": {
+                    "sha1": "b98f90c73165176e86a71133a5e9249ebcd9ed58",
+                    "sha256": "8c1444a7d3de1e897448805fa925964174fa282d6c91dacf89398a3fb6a5d844"
+                }
+            },
+            {
+                "path": "tests/global.rs",
+                "hashes": {
+                    "sha1": "335482714d0e2432b7ea94cf217c835d3b2c9c45",
+                    "sha256": "3e3e3793a7aa2923014b5e5684cf00c877e2217806a8526902c8e2dd94b1ba10"
+                }
+            },
+            {
+                "path": "tests/clock.rs",
+                "hashes": {
+                    "sha1": "7251b2f81d4925559893273771cc973720f7f6ab",
+                    "sha256": "890d40deabf559199f4c555937efe676839ad1c780e0d9b03333c42a1267c383"
+                }
+            },
+            {
+                "path": "CONTRIBUTING.md",
+                "hashes": {
+                    "sha1": "97b40e0e388eff7db827aba3ab936032e7b056c9",
+                    "sha256": "d0e8171ba7795f662d3c200939a4b024ad62489e4376283bf097aabe67a05199"
+                }
+            },
+            {
+                "path": "benches/tcp.rs",
+                "hashes": {
+                    "sha1": "49638e490eb8a97497a4a8c3019917fce12635b4",
+                    "sha256": "851a4af3e8ae552605f16be158aa8778db2fa1e13bcf7b9347560b735a971e67"
+                }
+            },
+            {
+                "path": "examples/chat-combinator-current-thread.rs",
+                "hashes": {
+                    "sha1": "113afea2c4d0f29faa81890d10628a7b28be61ab",
+                    "sha256": "364b5a6ce0b78330888e2a0faa7f211ab2cec66b1424484653837259cd076bcc"
+                }
+            },
+            {
+                "path": "examples/udp-codec.rs",
+                "hashes": {
+                    "sha1": "076f9d58976517a2d6384d714dddd4f742732024",
+                    "sha256": "50697bc5d875d67ad511a6a57c9a047609b2f184caa420fae11df4f16fd7405c"
+                }
+            },
+            {
+                "path": "examples/manual-runtime.rs",
+                "hashes": {
+                    "sha1": "1c8d16e223e94e873af23db2460b5dc34e98327f",
+                    "sha256": "5e398889040a1c080fe5c9edaa0d5bf7e43407602bb4101b8dea45af3d4d239f"
+                }
+            },
+            {
+                "path": "examples/proxy.rs",
+                "hashes": {
+                    "sha1": "b1aba0b943c68a30bfe273ed10e7d5ae3b711655",
+                    "sha256": "d1f586c4ac39b1088f1bbe92908a6deb0cc621dcda56faaf1bfc653c258b07ee"
+                }
+            },
+            {
+                "path": "examples/echo-udp.rs",
+                "hashes": {
+                    "sha1": "63e7940814a5ddf15263c0f3b2b2bff191f14e7a",
+                    "sha256": "3ac991cbdc7c9dcd61989fe9b8027e5e9578d1892bd2ca89ef6aa6d5368ea6b6"
+                }
+            },
+            {
+                "path": "examples/udp-client.rs",
+                "hashes": {
+                    "sha1": "d95235a70b54bfab3d9e2aeab71bab0d749dbaa3",
+                    "sha256": "e065d8210bf577b49275f5b742addf0f1fb3d04252155c90acf29ea0cb1ba332"
+                }
+            },
+            {
+                "path": "examples/hello_world.rs",
+                "hashes": {
+                    "sha1": "9ea0ad41c0601988ce172f5b46e3e7be41413cac",
+                    "sha256": "1703381c4a550529220c85aa0d6adb0ca2cad9ce18fbd01a3234079c649b7f0d"
+                }
+            },
+            {
+                "path": "examples/tinydb.rs",
+                "hashes": {
+                    "sha1": "db178fc961b3b764ebb0f5a1299b161fc8374ee0",
+                    "sha256": "b2eb0653cb0b9ef0630d781d49aeaa556b1742c6555d7c483ef71f83e5965022"
+                }
+            }
+        ],
+        "described": {
+            "releaseDate": "2019-01-25",
+            "projectWebsite": "https://tokio.rs",
+            "urls": {
+                "registry": "https://crates.io/crates/tokio",
+                "version": "https://crates.io/crates/tokio/0.1.15",
+                "download": "https://crates.io/api/v1/crates/tokio/0.1.15/download"
+            },
+            "hashes": {
+                "sha1": "51996e296e2791c7ebe322e8a2a988e60ade4338",
+                "sha256": "e0500b88064f08bebddd0c0bed39e19f5c567a5f30975bee52b0c0d3e2eeb38c"
+            },
+            "files": 68,
+            "tools": [
+                "clearlydefined/1.2.0",
+                "licensee/9.12.1",
+                "scancode/3.2.2",
+                "fossology/3.6.0"
+            ],
+            "toolScore": {
+                "total": 30,
+                "date": 30,
+                "source": 0
+            },
+            "score": {
+                "total": 30,
+                "date": 30,
+                "source": 0
+            }
+        },
+        "coordinates": {
+            "type": "crate",
+            "provider": "cratesio",
+            "name": "tokio",
+            "revision": "0.1.15"
+        },
+        "_meta": {
+            "schemaVersion": "1.6.1",
+            "updated": "2019-04-02T14:52:30.456Z"
+        },
+        "scores": {
+            "effective": 52,
+            "tool": 52
+        },
+        "_id": "crate/cratesio/-/tokio/0.1.15"
+    },
+    "crate/cratesio/-/tame-gcs/0.4.0": {
+        "coordinates": {
+            "type": "crate",
+            "provider": "cratesio",
+            "name": "tame-gcs",
+            "revision": "0.4.0"
+        },
+        "described": {
+            "toolScore": {
+                "total": 0,
+                "date": 0,
+                "source": 0
+            },
+            "score": {
+                "total": 0,
+                "date": 0,
+                "source": 0
+            }
+        },
+        "licensed": {
+            "toolScore": {
+                "total": 0,
+                "declared": 0,
+                "discovered": 0,
+                "consistency": 0,
+                "spdx": 0,
+                "texts": 0
+            },
+            "score": {
+                "total": 0,
+                "declared": 0,
+                "discovered": 0,
+                "consistency": 0,
+                "spdx": 0,
+                "texts": 0
+            }
+        },
+        "_meta": {
+            "schemaVersion": "1.6.1",
+            "updated": "2020-02-27T14:49:44.206Z"
+        },
+        "scores": {
+            "effective": 0,
+            "tool": 0
+        }
+    }
+}

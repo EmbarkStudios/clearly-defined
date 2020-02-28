@@ -15,7 +15,7 @@ pub const ROOT_URI: &str = "https://api.clearlydefined.io";
 // https://api.clearlydefined.io
 
 /// The "type" of the component
-#[derive(Clone, Copy, PartialEq, serde::Deserialize)]
+#[derive(Clone, Copy, PartialEq, Debug)]
 pub enum Shape {
     /// A Rust Crate
     Crate,
@@ -32,6 +32,15 @@ pub enum Shape {
     //DebianSources,
 }
 
+impl<'de> serde::Deserialize<'de> for Shape {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::de::Deserializer<'de>,
+    {
+        from_str(deserializer)
+    }
+}
+
 impl Shape {
     pub fn as_str(self) -> &'static str {
         match self {
@@ -41,25 +50,130 @@ impl Shape {
     }
 }
 
-#[derive(Clone, Copy, PartialEq, serde::Deserialize)]
+impl DeFromStr for Shape {}
+impl std::str::FromStr for Shape {
+    type Err = Error;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "crate" => Ok(Shape::Crate),
+            "git" => Ok(Shape::Git),
+            o => Err(Error::Other(format!("unknown shape '{}'", o))),
+        }
+    }
+}
+
+trait DeFromStr: std::str::FromStr<Err = Error> {
+    fn des(s: &str) -> Result<Self, Error> {
+        Self::from_str(s)
+    }
+}
+
+fn from_str<'de, T, D>(d: D) -> Result<T, D::Error>
+where
+    D: serde::de::Deserializer<'de>,
+    T: DeFromStr,
+{
+    use serde::de;
+
+    struct Vers<T>(std::marker::PhantomData<T>);
+
+    impl<'de, T> de::Visitor<'de> for Vers<T>
+    where
+        T: DeFromStr,
+    {
+        type Value = T;
+
+        fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+            formatter.write_str("string")
+        }
+
+        fn visit_str<E>(self, value: &str) -> Result<Self::Value, E>
+        where
+            E: de::Error,
+        {
+            T::des(value).map_err(serde::de::Error::custom)
+        }
+    }
+
+    d.deserialize_str(Vers(std::marker::PhantomData))
+}
+
+#[derive(Clone, Copy, PartialEq, Debug)]
 pub enum Provider {
     /// The canonical crates.io registry for Rust crates
-    Cratesio,
+    CratesIo,
     Github,
 }
 
 impl Provider {
     pub fn as_str(self) -> &'static str {
         match self {
-            Self::Cratesio => "cratesio",
+            Self::CratesIo => "cratesio",
             Self::Github => "github",
         }
     }
 }
 
+impl DeFromStr for Provider {}
+impl std::str::FromStr for Provider {
+    type Err = Error;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "cratesio" => Ok(Provider::CratesIo),
+            "github" => Ok(Provider::Github),
+            o => Err(Error::Other(format!("unknown provider '{}'", o))),
+        }
+    }
+}
+
+impl<'de> serde::Deserialize<'de> for Provider {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::de::Deserializer<'de>,
+    {
+        from_str(deserializer)
+    }
+}
+
+#[derive(Debug)]
 pub enum CoordVersion {
     Version(semver::Version),
     Any(String),
+}
+
+impl<'de> serde::Deserialize<'de> for CoordVersion {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::de::Deserializer<'de>,
+    {
+        use serde::de;
+
+        struct Vers;
+
+        impl<'de> de::Visitor<'de> for Vers {
+            type Value = CoordVersion;
+
+            fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+                formatter.write_str("version")
+            }
+
+            fn visit_str<E>(self, value: &str) -> Result<CoordVersion, E>
+            where
+                E: de::Error,
+            {
+                // Attempt to parse a semver version as that is the most likely
+                // version type stored here, at least for Rust
+                match value.parse::<semver::Version>() {
+                    Ok(vs) => Ok(CoordVersion::Version(vs)),
+                    Err(_) => Ok(CoordVersion::Any(value.to_owned())),
+                }
+            }
+        }
+
+        deserializer.deserialize_any(Vers)
+    }
 }
 
 impl fmt::Display for CoordVersion {
