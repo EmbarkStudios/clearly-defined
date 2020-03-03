@@ -4,6 +4,9 @@ use std::fmt;
 pub enum Error {
     #[error("HTTP error")]
     Http(#[source] HttpError),
+    #[cfg(feature = "client")]
+    #[error("HTTP error")]
+    Reqwest(#[source] reqwest::Error),
     #[error("HTTP status")]
     HttpStatus(#[source] HttpStatusError),
     #[error("JSON error")]
@@ -45,5 +48,12 @@ impl From<http::StatusCode> for Error {
 impl From<serde_json::Error> for Error {
     fn from(e: serde_json::Error) -> Self {
         Error::Json(e)
+    }
+}
+
+#[cfg(feature = "client")]
+impl From<reqwest::Error> for Error {
+    fn from(e: reqwest::Error) -> Self {
+        Error::Reqwest(e)
     }
 }

@@ -28,5 +28,6 @@ default-features = false
 
 [features]
 client = ["reqwest"]
-client-rustls = ["client", "reqwest/rustls-tls"]
-client-native = ["client", "reqwest/native-tls"]
+rustls = ["client", "reqwest/rustls-tls"]
+native = ["client", "reqwest/native-tls"]
+blocking = ["client", "reqwest/blocking"]
