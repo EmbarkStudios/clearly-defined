@@ -16,7 +16,7 @@ pub struct DefCoords {
 #[derive(Deserialize, PartialEq, Debug)]
 pub struct Hashes {
     pub sha1: String,
-    pub sha256: String,
+    pub sha256: Option<String>,
 }
 
 #[derive(Deserialize, PartialEq, Debug)]
@@ -97,7 +97,7 @@ pub struct License {
 #[derive(Deserialize, Debug)]
 pub struct File {
     pub path: String,
-    pub hashes: Hashes,
+    pub hashes: Option<Hashes>,
     pub license: Option<String>,
     #[serde(default)]
     pub attributions: Vec<String>,
@@ -207,26 +207,21 @@ impl<'de> serde::Deserialize<'de> for Definition {
 /// Gets the definitions for the supplied coordinates, note that this method
 /// is limited to a maximum of 1000 coordinates per request, which is why
 /// the return is actually an iterator
-pub fn get<I, CA, C>(coordinates: I) -> impl Iterator<Item = Request<Bytes>>
+pub fn get<I>(coordinates: I) -> impl Iterator<Item = Request<Bytes>>
 where
-    I: IntoIterator<Item = CA>,
-    CA: AsRef<C>,
-    C: crate::Coord,
+    I: IntoIterator<Item = crate::Coordinate>,
 {
     let mut requests = Vec::new();
     let mut coords = Vec::with_capacity(1000);
     for coord in coordinates.into_iter() {
-        coords.push(serde_json::Value::String(format!(
-            "{}",
-            coord.as_ref().display()
-        )));
+        coords.push(serde_json::Value::String(format!("{}", coord)));
 
         if coords.len() == 1000 {
             requests.push(std::mem::replace(&mut coords, Vec::with_capacity(1000)));
         }
     }
 
-    if coords.len() > 0 {
+    if !coords.is_empty() {
         requests.push(coords);
     }
 
@@ -246,7 +241,7 @@ where
 }
 
 pub struct GetResponse {
-    /// The list of objects matching the query
+    /// The component definitions, one for each coordinate passed to the get request
     pub definitions: Vec<Definition>,
 }
 

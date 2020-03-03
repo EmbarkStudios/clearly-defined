@@ -1,7 +1,7 @@
 #[cfg(feature = "client")]
 pub mod client;
 
-pub mod api;
+pub mod definitions;
 pub mod error;
 
 pub use error::Error;
@@ -139,7 +139,7 @@ impl<'de> serde::Deserialize<'de> for Provider {
 
 #[derive(Debug)]
 pub enum CoordVersion {
-    Version(semver::Version),
+    Semver(semver::Version),
     Any(String),
 }
 
@@ -166,7 +166,7 @@ impl<'de> serde::Deserialize<'de> for CoordVersion {
                 // Attempt to parse a semver version as that is the most likely
                 // version type stored here, at least for Rust
                 match value.parse::<semver::Version>() {
-                    Ok(vs) => Ok(CoordVersion::Version(vs)),
+                    Ok(vs) => Ok(CoordVersion::Semver(vs)),
                     Err(_) => Ok(CoordVersion::Any(value.to_owned())),
                 }
             }
@@ -179,7 +179,7 @@ impl<'de> serde::Deserialize<'de> for CoordVersion {
 impl fmt::Display for CoordVersion {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            Self::Version(vs) => write!(f, "{}", vs),
+            Self::Semver(vs) => write!(f, "{}", vs),
             Self::Any(s) => f.write_str(&s),
         }
     }
@@ -215,38 +215,19 @@ pub struct Coordinate {
     pub curation_pr: Option<u32>,
 }
 
-pub trait Coord: Sized {
-    fn shape(&self) -> Shape;
-    fn provider(&self) -> Provider;
-    fn namespace(&self) -> Option<&str> {
-        None
-    }
-    fn name(&self) -> &str;
-    fn version(&self) -> &CoordVersion;
-    fn curation_pr(&self) -> Option<u32> {
-        None
-    }
-    fn display(&self) -> CoordDisp<'_, Self>;
-}
-
-pub struct CoordDisp<'a, T>(&'a T);
-
-impl<'a, T> fmt::Display for CoordDisp<'a, T>
-where
-    T: Coord,
-{
+impl fmt::Display for Coordinate {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(
             f,
             "{}/{}/{}/{}/{}",
-            self.0.shape().as_str(),
-            self.0.provider().as_str(),
-            self.0.namespace().unwrap_or("-"),
-            self.0.name(),
-            self.0.version()
+            self.shape.as_str(),
+            self.provider.as_str(),
+            self.namespace.as_ref().map(|s| s.as_str()).unwrap_or("-"),
+            self.name,
+            self.version,
         )?;
 
-        if let Some(pr) = self.0.curation_pr() {
+        if let Some(pr) = self.curation_pr {
             write!(f, "/pr/{}", pr)
         } else {
             Ok(())
@@ -278,7 +259,6 @@ where
             //         }
             //     }
             // }
-
             Err(Error::from(resp.status()))
         }
     }

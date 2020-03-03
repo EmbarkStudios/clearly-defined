@@ -1,4 +1,4 @@
-use cd::api::definitions as defs;
+use cd::definitions as defs;
 use std::convert::TryFrom;
 
 const GET_DATA: &str = include_str!("data/definitions-get.json");
@@ -59,8 +59,10 @@ fn deserialize_get_response() {
             assert_eq!(
                 defs::Hashes {
                     sha1: "85b0fe2790310f9d6daf04393bc0cf266841d861".to_owned(),
-                    sha256: "af6f3550d8dff9ef7dc34d384ac6f107e5d31c8f57d9f28e0081503f547ac8f5"
-                        .to_owned(),
+                    sha256: Some(
+                        "af6f3550d8dff9ef7dc34d384ac6f107e5d31c8f57d9f28e0081503f547ac8f5"
+                            .to_owned()
+                    ),
                 },
                 desc.hashes
             );
@@ -133,11 +135,13 @@ fn deserialize_get_response() {
             {
                 let build = files.iter().find(|f| f.path == "build.rs").unwrap();
                 assert_eq!(
-                    defs::Hashes {
+                    Some(defs::Hashes {
                         sha1: "e58729c91f5fa640cdc10944579d803c47071451".to_owned(),
-                        sha256: "2570006136c4fed9199b9c23c100a99e1be04d6c6a3e9630a6613a67baedf503"
-                            .to_owned(),
-                    },
+                        sha256: Some(
+                            "2570006136c4fed9199b9c23c100a99e1be04d6c6a3e9630a6613a67baedf503"
+                                .to_owned()
+                        ),
+                    }),
                     build.hashes
                 );
             }
