@@ -6,6 +6,7 @@ pub mod error;
 
 pub use error::Error;
 
+use serde::Deserialize;
 use std::{convert::TryFrom, fmt, str::FromStr};
 
 pub const ROOT_URI: &str = "https://api.clearlydefined.io";
@@ -32,7 +33,7 @@ pub enum Shape {
     //DebianSources,
 }
 
-impl<'de> serde::Deserialize<'de> for Shape {
+impl<'de> Deserialize<'de> for Shape {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: serde::de::Deserializer<'de>,
@@ -42,6 +43,7 @@ impl<'de> serde::Deserialize<'de> for Shape {
 }
 
 impl Shape {
+    #[inline]
     pub fn as_str(self) -> &'static str {
         match self {
             Self::Crate => "crate",
@@ -69,34 +71,13 @@ trait DeFromStr: FromStr<Err = Error> {
     }
 }
 
+#[inline]
 fn from_str<'de, T, D>(d: D) -> Result<T, D::Error>
 where
     D: serde::de::Deserializer<'de>,
     T: DeFromStr,
 {
-    use serde::de;
-
-    struct Vers<T>(std::marker::PhantomData<T>);
-
-    impl<'de, T> de::Visitor<'de> for Vers<T>
-    where
-        T: DeFromStr,
-    {
-        type Value = T;
-
-        fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-            formatter.write_str("string")
-        }
-
-        fn visit_str<E>(self, value: &str) -> Result<Self::Value, E>
-        where
-            E: de::Error,
-        {
-            T::des(value).map_err(serde::de::Error::custom)
-        }
-    }
-
-    d.deserialize_str(Vers(std::marker::PhantomData))
+    <&'de str>::deserialize(d).and_then(|value| T::des(value).map_err(serde::de::Error::custom))
 }
 
 #[derive(Clone, Copy, PartialEq, Debug)]
@@ -107,6 +88,7 @@ pub enum Provider {
 }
 
 impl Provider {
+    #[inline]
     pub fn as_str(self) -> &'static str {
         match self {
             Self::CratesIo => "cratesio",
@@ -137,7 +119,7 @@ impl<'de> serde::Deserialize<'de> for Provider {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum CoordVersion {
     Semver(semver::Version),
     Any(String),
@@ -150,10 +132,10 @@ impl FromStr for CoordVersion {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         // Attempt to parse a semver version as that is the most likely
         // version type stored here, at least for Rust
-        match s.parse::<semver::Version>() {
-            Ok(vs) => Ok(CoordVersion::Semver(vs)),
-            Err(_) => Ok(CoordVersion::Any(s.to_owned())),
-        }
+        Ok(match s.parse::<semver::Version>() {
+            Ok(vs) => CoordVersion::Semver(vs),
+            Err(_err) => CoordVersion::Any(s.to_owned()),
+        })
     }
 }
 
