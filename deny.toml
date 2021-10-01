@@ -1,0 +1,45 @@
+targets = []
+
+[advisories]
+vulnerability = "deny"
+unmaintained = "deny"
+yanked = "deny"
+ignore = []
+
+[licenses]
+unlicensed = "deny"
+allow = ["MIT", "Apache-2.0"]
+copyleft = "deny"
+default = "deny"
+confidence-threshold = 0.8
+exceptions = [
+    { name = "untrusted", allow = [
+        "ISC",
+    ] },
+    { name = "ring", allow = [
+        "MIT",
+        "ISC",
+        "OpenSSL",
+    ] },
+    { name = "webpki-roots", allow = [
+        "MPL-2.0",
+    ] },
+    { name = "webpki", allow = [
+        "ISC",
+    ] },
+]
+
+[[licenses.clarify]]
+name = "ring"
+expression = "MIT AND ISC AND OpenSSL"
+license-files = [{ path = "LICENSE", hash = 0xbd0eed23 }]
+
+[bans]
+multiple-versions = "deny"
+deny = []
+skip = []
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-git = []
