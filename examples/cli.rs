@@ -3,8 +3,10 @@ use ansi_term::Color;
 fn main() -> Result<(), anyhow::Error> {
     let client = cd::client::Client::new();
 
-    let get_reqs =
-        cd::definitions::get(std::env::args().skip(1).filter_map(|arg| arg.parse().ok()));
+    let get_reqs = cd::definitions::get(
+        10,
+        std::env::args().skip(1).filter_map(|arg| arg.parse().ok()),
+    );
 
     for get_req in get_reqs {
         let get_res = client.execute::<cd::definitions::GetResponse>(get_req)?;

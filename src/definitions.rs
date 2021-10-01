@@ -232,20 +232,26 @@ impl<'de> serde::Deserialize<'de> for Definition {
     }
 }
 
-/// Gets the definitions for the supplied coordinates, note that this method
-/// is limited to a maximum of 1000 coordinates per request, which is why
-/// the return is actually an iterator
-pub fn get<I>(coordinates: I) -> impl Iterator<Item = Request<Bytes>>
+/// Gets the definitions for the supplied coordinates, note that in addition to
+/// this API call being limited to a maximum of 1000 coordinates per request,
+/// the request time is _extremely_ slow and can timeout, so it is recommended
+/// you specify a reasonable chunk size and send multiple parallel requests
+pub fn get<I>(chunk_size: usize, coordinates: I) -> impl Iterator<Item = Request<Bytes>>
 where
     I: IntoIterator<Item = crate::Coordinate>,
 {
+    let chunk_size = std::cmp::min(chunk_size, 1000);
     let mut requests = Vec::new();
-    let mut coords = Vec::with_capacity(1000);
+    let mut coords = Vec::with_capacity(chunk_size);
+
     for coord in coordinates.into_iter() {
         coords.push(serde_json::Value::String(format!("{}", coord)));
 
-        if coords.len() == 1000 {
-            requests.push(std::mem::replace(&mut coords, Vec::with_capacity(1000)));
+        if coords.len() == chunk_size {
+            requests.push(std::mem::replace(
+                &mut coords,
+                Vec::with_capacity(chunk_size),
+            ));
         }
     }
 
