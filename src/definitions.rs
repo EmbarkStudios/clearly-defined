@@ -2,7 +2,7 @@ use crate::{ApiResponse, Error};
 use bytes::Bytes;
 use http::Request;
 use serde::Deserialize;
-use std::{collections::BTreeMap, convert::TryFrom};
+use std::{collections::BTreeMap, convert::TryFrom, fmt};
 
 #[derive(Deserialize, Debug)]
 pub struct DefCoords {
@@ -11,6 +11,19 @@ pub struct DefCoords {
     pub provider: crate::Provider,
     pub name: String,
     pub revision: crate::CoordVersion,
+}
+
+impl fmt::Display for DefCoords {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
+            "{}/{}/{}/{}",
+            self.shape.as_str(),
+            self.provider.as_str(),
+            self.name,
+            self.revision,
+        )
+    }
 }
 
 #[derive(Deserialize, PartialEq, Debug)]
@@ -106,6 +119,12 @@ pub struct File {
     pub token: Option<String>,
 }
 
+#[derive(Deserialize, Debug)]
+pub struct TopLevelScore {
+    pub effective: u8,
+    pub tool: u8,
+}
+
 #[derive(Debug)]
 pub struct Definition {
     pub coordinates: DefCoords,
@@ -114,6 +133,7 @@ pub struct Definition {
     pub described: Option<Description>,
     pub licensed: Option<License>,
     pub files: Vec<File>,
+    pub scores: TopLevelScore,
 }
 
 // Somewhat annoyingly, instead of returning null or some kind of error if a
@@ -126,7 +146,6 @@ impl<'de> serde::Deserialize<'de> for Definition {
         D: serde::de::Deserializer<'de>,
     {
         use serde::de;
-        use std::fmt;
 
         struct DefVisitor;
 
@@ -145,6 +164,11 @@ impl<'de> serde::Deserialize<'de> for Definition {
                 let mut described = None;
                 let mut licensed = None;
                 let mut files = Vec::new();
+                let mut scores = TopLevelScore {
+                    effective: 0,
+                    tool: 0,
+                };
+
                 while let Some(key) = map.next_key()? {
                     match key {
                         "coordinates" => {
@@ -181,6 +205,9 @@ impl<'de> serde::Deserialize<'de> for Definition {
 
                             files = map.next_value()?;
                         }
+                        "scores" => {
+                            scores = map.next_value()?;
+                        }
                         _ => { /* just ignore unknown fields */ }
                     }
                 }
@@ -195,11 +222,12 @@ impl<'de> serde::Deserialize<'de> for Definition {
                     described,
                     licensed,
                     files,
+                    scores,
                 })
             }
         }
 
-        const FIELDS: &[&str] = &["coordinates", "described", "licensed", "files"];
+        const FIELDS: &[&str] = &["coordinates", "described", "licensed", "files", "scores"];
         deserializer.deserialize_struct("Definition", FIELDS, DefVisitor)
     }
 }

@@ -6,7 +6,7 @@ pub mod error;
 
 pub use error::Error;
 
-use std::{convert::TryFrom, fmt};
+use std::{convert::TryFrom, fmt, str::FromStr};
 
 pub const ROOT_URI: &str = "https://api.clearlydefined.io";
 
@@ -51,19 +51,19 @@ impl Shape {
 }
 
 impl DeFromStr for Shape {}
-impl std::str::FromStr for Shape {
+impl FromStr for Shape {
     type Err = Error;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "crate" => Ok(Shape::Crate),
             "git" => Ok(Shape::Git),
-            o => Err(Error::Other(format!("unknown shape '{}'", o))),
+            o => Err(anyhow::anyhow!("unknown shape '{}'", o))?,
         }
     }
 }
 
-trait DeFromStr: std::str::FromStr<Err = Error> {
+trait DeFromStr: FromStr<Err = Error> {
     fn des(s: &str) -> Result<Self, Error> {
         Self::from_str(s)
     }
@@ -116,14 +116,14 @@ impl Provider {
 }
 
 impl DeFromStr for Provider {}
-impl std::str::FromStr for Provider {
+impl FromStr for Provider {
     type Err = Error;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "cratesio" => Ok(Provider::CratesIo),
             "github" => Ok(Provider::Github),
-            o => Err(Error::Other(format!("unknown provider '{}'", o))),
+            o => Err(anyhow::anyhow!("unknown provider '{}'", o))?,
         }
     }
 }
@@ -143,36 +143,26 @@ pub enum CoordVersion {
     Any(String),
 }
 
+impl DeFromStr for CoordVersion {}
+impl FromStr for CoordVersion {
+    type Err = Error;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        // Attempt to parse a semver version as that is the most likely
+        // version type stored here, at least for Rust
+        match s.parse::<semver::Version>() {
+            Ok(vs) => Ok(CoordVersion::Semver(vs)),
+            Err(_) => Ok(CoordVersion::Any(s.to_owned())),
+        }
+    }
+}
+
 impl<'de> serde::Deserialize<'de> for CoordVersion {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: serde::de::Deserializer<'de>,
     {
-        use serde::de;
-
-        struct Vers;
-
-        impl<'de> de::Visitor<'de> for Vers {
-            type Value = CoordVersion;
-
-            fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-                formatter.write_str("version")
-            }
-
-            fn visit_str<E>(self, value: &str) -> Result<CoordVersion, E>
-            where
-                E: de::Error,
-            {
-                // Attempt to parse a semver version as that is the most likely
-                // version type stored here, at least for Rust
-                match value.parse::<semver::Version>() {
-                    Ok(vs) => Ok(CoordVersion::Semver(vs)),
-                    Err(_) => Ok(CoordVersion::Any(value.to_owned())),
-                }
-            }
-        }
-
-        deserializer.deserialize_any(Vers)
+        from_str(deserializer)
     }
 }
 
@@ -180,39 +170,70 @@ impl fmt::Display for CoordVersion {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             Self::Semver(vs) => write!(f, "{}", vs),
-            Self::Any(s) => f.write_str(&s),
+            Self::Any(s) => f.write_str(s),
         }
     }
 }
 
 /// Defines the coordinates of a specific component
 ///
-/// For example, `https://clearlydefined.io/definitions/crate/cratesio/-/syn/1.0.14`
-///
-/// shape `crate` – the shape of the component you are looking for. For
-/// example, npm, git, nuget, maven, crate...
-/// provider `cratesio` – where the component can be found. Examples include
-/// npmjs, mavencentral, github, nuget, cratesio...
-/// namespace `-` – many component systems have namespaces. GitHub orgs, NPM
-/// namespace, Maven group id, … This segment must be supplied. If your
-/// component does not have a namespace, use ‘-‘ (ASCII hyphen).
-/// name `syn` – the name of the component you want. Given the namespace segment
-/// mentioned above, this is just the simple name.
-/// revision `1.0.14` – components typically have some differentiator like a
-/// version or commit id. Use that here. If this segment is omitted, the latest
-/// revision is used (if that makes sense for the provider).
-/// pr – literally the string pr. This is a marker segment and must be included
-/// if you are looking for the results of applying a particular curation PR to
-/// the harvested and curated data for a component
-/// number – the GitHub PR number to apply to the existing harvested and curated
-/// data.
+/// For example, `crate/cratesio/-/syn/1.0.14`
 pub struct Coordinate {
+    /// The shape/kind of the component
     pub shape: Shape,
+    /// The provider/location of the component
     pub provider: Provider,
+    /// Namespace of the component in the provider, or `-` if the provider
+    /// does not have namespaces
     pub namespace: Option<String>,
+    /// The name of the component
     pub name: String,
+    /// The revision of the component, provider dependent
     pub version: CoordVersion,
+    /// A curation PR to apply to existing harvested/curated data for the component
     pub curation_pr: Option<u32>,
+}
+
+impl std::str::FromStr for Coordinate {
+    type Err = Error;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        use anyhow::Context as _;
+
+        let mut it = s.split('/');
+
+        let shape = it.next().context("missing shape")?.parse()?;
+        let provider = it.next().context("missing provider")?.parse()?;
+        let namespace = match it.next().context("missing namespace")? {
+            "-" => None,
+            other => Some(other.to_owned()),
+        };
+        let name = it.next().context("missing name")?.to_owned();
+        let version = it.next().context("missing version")?.parse()?;
+
+        let curation_pr = match it.next() {
+            Some(pr) if pr == "pr" => Some(
+                it.next()
+                    .context("expected curation PR number")?
+                    .parse()
+                    .context("unable to parse PR number")?,
+            ),
+            Some(other) => Err(anyhow::anyhow!(
+                "unknown trailing path component '{}'",
+                other
+            ))?,
+            None => None,
+        };
+
+        Ok(Self {
+            shape,
+            provider,
+            namespace,
+            name,
+            version,
+            curation_pr,
+        })
+    }
 }
 
 impl fmt::Display for Coordinate {
@@ -222,7 +243,7 @@ impl fmt::Display for Coordinate {
             "{}/{}/{}/{}/{}",
             self.shape.as_str(),
             self.provider.as_str(),
-            self.namespace.as_ref().map(|s| s.as_str()).unwrap_or("-"),
+            self.namespace.as_deref().unwrap_or("-"),
             self.name,
             self.version,
         )?;
