@@ -33,6 +33,10 @@ fn deserialize_get_response() {
 
         {
             let desc = syn.described.as_ref().unwrap();
+            assert_eq!(
+                syn.coordinates.revision,
+                cd::CoordVersion::Semver(semver::Version::new(1, 0, 14))
+            );
             assert_eq!(chrono::NaiveDate::from_ymd(2020, 1, 20), desc.release_date);
             assert_eq!(&defs::SourceLocation {
                 r#type: "git".to_owned(),
