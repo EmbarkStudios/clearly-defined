@@ -56,9 +56,10 @@ async fn convert_response(res: reqwest::Response) -> Result<http::Response<bytes
         .status(res.status())
         .version(res.version());
 
+    use anyhow::Context;
     let headers = builder
         .headers_mut()
-        .ok_or_else(|| Error::Other("failed to convert response headers".to_owned()))?;
+        .context("failed to convert response headers")?;
 
     headers.extend(
         res.headers()

@@ -25,7 +25,7 @@ impl Client {
         let response = self.inner.execute(request)?;
         let response = convert_response(response)?;
 
-        Ok(Res::try_from_parts(response)?)
+        Res::try_from_parts(response)
     }
 }
 
@@ -58,9 +58,10 @@ fn convert_response(
         .status(res.status())
         .version(res.version());
 
+    use anyhow::Context;
     let headers = builder
         .headers_mut()
-        .ok_or_else(|| Error::Other("failed to convert response headers".to_owned()))?;
+        .context("failed to convert response headers")?;
 
     headers.extend(
         res.headers()
@@ -68,7 +69,7 @@ fn convert_response(
             .map(|(k, v)| (k.clone(), v.clone())),
     );
 
-    use bytes::buf::BufMutExt;
+    use bytes::BufMut;
     let body = bytes::BytesMut::with_capacity(res.content_length().unwrap_or(1024) as usize);
     let mut w = body.writer();
     res.copy_to(&mut w)?;
