@@ -31,10 +31,11 @@ optional = true
 default-features = false
 
 [features]
-client = ["reqwest"]
-rustls = ["client", "reqwest/rustls-tls"]
-native = ["client", "reqwest/native-tls"]
 blocking = ["client", "reqwest/blocking"]
+cache = []
+client = ["reqwest"]
+native = ["client", "reqwest/native-tls"]
+rustls = ["client", "reqwest/rustls-tls"]
 
 [[example]]
 name = "cli"
