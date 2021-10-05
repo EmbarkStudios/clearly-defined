@@ -1,3 +1,5 @@
+#[cfg(feature = "cache")]
+pub mod cache;
 #[cfg(feature = "client")]
 pub mod client;
 
