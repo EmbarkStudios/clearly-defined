@@ -3,23 +3,43 @@ name = "cd"
 description = "API interaction for clearlydefined.io"
 repository = "https://github.com/EmbarkStudios/clearly-defined"
 version = "0.1.0"
-authors = ["Embark <opensource@embark-studios.com>", "Jake Shadle <jake.shadle@embark-studios.com>"]
-edition = "2018"
+authors = [
+    "Embark <opensource@embark-studios.com>",
+    "Jake Shadle <jake.shadle@embark-studios.com>",
+]
+edition = "2021"
 license = "MIT OR Apache-2.0"
 readme = "README.md"
 documentation = "https://docs.rs/cd"
 homepage = "https://github.com/EmbarkStudios/clearly-defined"
 keywords = ["license", "spdx"]
 
+[features]
+blocking = ["client", "reqwest/blocking"]
+# cache = []
+client = ["reqwest"]
+native = ["client", "reqwest/native-tls"]
+rustls = ["client", "reqwest/rustls-tls"]
+
 [dependencies]
+anyhow = "1.0"
+bytes = "1.1"
+chrono = { version = "0.4.10", features = ["serde"] }
 http = "0.2.0"
+semver = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+url = "2.1.1"
 
 [dependencies.reqwest]
-version = "0.10.1"
+version = "0.11"
 optional = true
 default-features = false
 
-[features]
-client = ["reqwest"]
-client-rustls = ["client", "reqwest/rustls-tls"]
-client-native = ["client", "reqwest/native-tls"]
+[[example]]
+name = "cli"
+required-features = ["blocking", "rustls"]
+
+[dev-dependencies]
+ansi_term = "0.12"
