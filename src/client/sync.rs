@@ -29,7 +29,7 @@ impl Client {
     }
 }
 
-/// Converts a vanilla http::Request into a reqwest::Request
+/// Converts a vanilla [`http::Request`] into a [`reqwest::Request`]
 fn convert_request(
     req: http::Request<bytes::Bytes>,
     client: &BClient,
@@ -43,14 +43,15 @@ fn convert_request(
         http::Method::POST => client.post(&uri),
         http::Method::DELETE => client.delete(&uri),
         http::Method::PUT => client.put(&uri),
-        method => unimplemented!("{} not implemented", method),
+        method => unreachable!("{} not implemented", method),
     };
 
     Ok(builder.headers(parts.headers).body(body.to_vec()).build()?)
 }
 
-/// Converts a reqwest::Response into a vanilla http::Response. This currently copies
-/// the entire response body into a single buffer with no streaming
+/// Converts a [`reqwest::Response`] into a vanilla [`http::Response`]. This
+/// currently copies the entire response body into a single buffer with no
+/// streaming
 fn convert_response(
     mut res: reqwest::blocking::Response,
 ) -> Result<http::Response<bytes::Bytes>, Error> {

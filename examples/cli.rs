@@ -13,7 +13,7 @@ fn main() -> Result<(), anyhow::Error> {
 
         for def in get_res.definitions {
             match def.described {
-                Some(desc) => {
+                Some(_desc) => {
                     println!("{} - {}", def.coordinates, def.scores.effective);
                     if let Some(lic) = def.licensed {
                         println!(

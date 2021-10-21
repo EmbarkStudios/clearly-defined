@@ -152,7 +152,7 @@ impl<'de> serde::Deserialize<'de> for Definition {
         impl<'de> de::Visitor<'de> for DefVisitor {
             type Value = Definition;
 
-            fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+            fn expecting(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
                 formatter.write_str("struct Definition")
             }
 
@@ -244,7 +244,7 @@ where
     let mut requests = Vec::new();
     let mut coords = Vec::with_capacity(chunk_size);
 
-    for coord in coordinates.into_iter() {
+    for coord in coordinates {
         coords.push(serde_json::Value::String(format!("{}", coord)));
 
         if coords.len() == chunk_size {

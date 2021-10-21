@@ -29,7 +29,7 @@ impl Client {
     }
 }
 
-/// Converts a vanilla http::Request into a reqwest::Request
+/// Converts a vanilla [`http::Request`] into a [`reqwest::Request`]
 async fn convert_request(
     req: http::Request<bytes::Bytes>,
     client: &AClient,
@@ -43,14 +43,14 @@ async fn convert_request(
         http::Method::POST => client.post(&uri),
         http::Method::DELETE => client.delete(&uri),
         http::Method::PUT => client.put(&uri),
-        method => unimplemented!("{} not implemented", method),
+        method => unreachable!("{} not implemented", method),
     };
 
     Ok(builder.headers(parts.headers).body(body).build()?)
 }
 
-/// Converts a reqwest::Response into a vanilla http::Response. This currently copies
-/// the entire response body into a single buffer with no streaming
+/// Converts a [`reqwest::Response`] into a vanilla [`http::Response`]. This
+/// currently copies the entire response body into a single buffer with no streaming
 async fn convert_response(res: reqwest::Response) -> Result<http::Response<bytes::Bytes>, Error> {
     let mut builder = http::Response::builder()
         .status(res.status())
