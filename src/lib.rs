@@ -79,8 +79,6 @@
 )]
 // END - Embark standard lints v0.5 for Rust 1.55+
 
-#[cfg(feature = "cache")]
-pub mod cache;
 #[cfg(feature = "client")]
 pub mod client;
 
