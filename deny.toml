@@ -4,7 +4,12 @@ targets = []
 vulnerability = "deny"
 unmaintained = "deny"
 yanked = "deny"
-ignore = []
+ignore = [
+    # Don't care, only use chrono for datetime parsing
+    "RUSTSEC-2020-0159",
+    # Ditto
+    "RUSTSEC-2020-0071",
+]
 
 [licenses]
 unlicensed = "deny"
