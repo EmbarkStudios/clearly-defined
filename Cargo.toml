@@ -15,23 +15,37 @@ homepage = "https://github.com/EmbarkStudios/clearly-defined"
 keywords = ["license", "spdx"]
 
 [features]
+# Adds a blocking client implementation to make API requests with, can be combined
+# with either `native` or `rustls` to configure the TLS implementation used
 blocking = ["client", "reqwest/blocking"]
 # cache = []
 client = ["reqwest"]
+# Adds an async client implementation using the native TLS implementation
 native = ["client", "reqwest/native-tls"]
+# Adds an async client implementation using the rustls TLS implementation
 rustls = ["client", "reqwest/rustls-tls"]
 
 [dependencies]
+# Error handling
 anyhow = "1.0"
+# Nicer byte buffers
 bytes = "1.1"
+# Utf-8 paths
+camino = { version = "1.0", features = ["serde1"] }
+# Datetime representation
 chrono = { version = "0.4.10", features = ["serde"] }
+# HTTP helpers
 http = "0.2.0"
+# Semver parsing
 semver = "1.0"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+# Easier error definition
 thiserror = "1.0"
-url = "2.1.1"
+# Url parsing
+url = "2.1"
 
+# "Built-in" HTTP request implementation
 [dependencies.reqwest]
 version = "0.11"
 optional = true

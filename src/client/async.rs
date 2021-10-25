@@ -1,6 +1,8 @@
 use crate::Error;
 use reqwest::Client as AClient;
 
+/// A asynchronous client that can execute a request and return the parsed
+/// response
 #[derive(Default)]
 pub struct Client {
     inner: AClient,
