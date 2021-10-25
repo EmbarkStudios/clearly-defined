@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
+## [0.2.0] - 2021-10-25
 ### Added
 - First pass implementation of basic support for retrieving the license information for one or more coordinates.
 - Adds an optional blocking and asynchronous client implementation that can be activated with features if desired.
@@ -15,5 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial add. This does absolutely nothing I just want to squat the name on crates.io
 
 <!-- next-url -->
-[Unreleased]: https://github.com/EmbarkStudios/clearly-defined/compare/0.1.0...HEAD
+[Unreleased]: https://github.com/EmbarkStudios/cargo-about/compare/0.2.0...HEAD
+[0.2.0]: https://github.com/EmbarkStudios/clearly-defined/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/EmbarkStudios/clearly-defined/releases/tag/0.1.0
