@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
+### Added
+- First pass implementation of basic support for retrieving the license information for one or more coordinates.
+- Adds an optional blocking and asynchronous client implementation that can be activated with features if desired.
 
 ## [0.1.0] - 2019-02-15
 ### Added
