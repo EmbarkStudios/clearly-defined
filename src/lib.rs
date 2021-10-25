@@ -90,6 +90,8 @@ pub use error::Error;
 use serde::Deserialize;
 use std::{convert::TryFrom, fmt, str::FromStr};
 
+pub use camino::Utf8PathBuf;
+
 pub const ROOT_URI: &str = "https://api.clearlydefined.io";
 
 // https://api.clearlydefined.io/api-docs/#/definitions/get_definitions

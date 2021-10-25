@@ -4,6 +4,7 @@ use http::Request;
 use serde::Deserialize;
 use std::{collections::BTreeMap, convert::TryFrom, fmt};
 
+/// The coordinates of a definition
 #[derive(Deserialize, Debug)]
 pub struct DefCoords {
     #[serde(rename = "type")]
@@ -28,7 +29,9 @@ impl fmt::Display for DefCoords {
 
 #[derive(Deserialize, PartialEq, Debug)]
 pub struct Hashes {
+    /// The sha-1 hash of a file
     pub sha1: String,
+    /// The sha-256 hash of a file
     pub sha256: Option<String>,
 }
 
@@ -52,13 +55,23 @@ pub struct SourceLocation {
 #[derive(Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct Description {
+    /// The Datetime when the component was actually released
     pub release_date: chrono::NaiveDate,
+    /// The location where the component was harvested from
     pub source_location: Option<SourceLocation>,
+    /// The website associated with the component
     pub project_website: Option<String>,
+    /// Urls associated with the component, eg crates.io components will have
+    /// the crates.io url, the version specific crates.io url, and the crates.io
+    /// download url
     pub urls: BTreeMap<String, String>,
+    /// Actually unsure how these hashes are calculated
     pub hashes: Hashes,
+    /// The total number of files that were scanned
     pub files: u32,
+    /// The tools and curations that were used to harvest the component
     pub tools: Vec<String>,
+    /// Scores for the component
     pub tool_score: Scores,
     pub score: Scores,
 }
@@ -75,48 +88,69 @@ pub struct LicenseScore {
 
 #[derive(Deserialize, Debug)]
 pub struct Attribution {
+    /// The number of files that had no attribution
     pub unknown: u32,
+    /// Every attribution that was discovered
     #[serde(default)]
     pub parties: Vec<String>,
 }
 
 #[derive(Deserialize, Debug)]
 pub struct Discovered {
+    /// The number of files that had no, or indeterminant, license information
     pub unknown: u32,
+    /// SPDX license expressions that were discovered
     pub expressions: Vec<String>,
 }
 
 #[derive(Deserialize, Debug)]
 pub struct Facet {
+    /// The attributions that were discovered
     pub attribution: Attribution,
+    /// The license expressions that were discovered
     pub discovered: Discovered,
+    /// The number of files that were crawled
     pub files: u32,
 }
 
 #[derive(Deserialize, Debug)]
 pub struct Facets {
+    /// The only facet I have seen, don't know if there will be more in the future
     pub core: Facet,
 }
 
+/// Top-level license information for a definition
 #[derive(Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct License {
+    /// The license expression that was declared for the component, eg in a
+    /// cargo crate this will be the value of the `license` field in the Cargo.toml
     pub declared: String,
+    /// Facets of the license
     pub facets: Facets,
+    /// Tool scores, they differ from `score`, but don't actually know the
+    /// difference in practice
     pub tool_score: LicenseScore,
     pub score: LicenseScore,
 }
 
+/// A single file that was crawled when the definition was harvested
 #[derive(Deserialize, Debug)]
 pub struct File {
-    pub path: String,
+    /// The relative path of the file
+    pub path: crate::Utf8PathBuf,
+    /// The hash information for the file when it was harvested
     pub hashes: Option<Hashes>,
+    /// The license that was discovered for the file
     pub license: Option<String>,
+    /// Attributions discovered for the file
     #[serde(default)]
     pub attributions: Vec<String>,
+    /// "Natures" determined for the file. Unsure how many of them there are
+    /// but in practice I have only seen `license` so this should probably be
+    /// made into an enum at some point
     #[serde(default)]
     pub natures: Vec<String>,
-    pub token: Option<String>,
 }
 
 #[derive(Deserialize, Debug)]
@@ -127,11 +161,13 @@ pub struct TopLevelScore {
 
 #[derive(Debug)]
 pub struct Definition {
+    /// The specific coordinates the definition pertains to
     pub coordinates: DefCoords,
     /// The description of the component, won't be present if the coordinate
     /// has not been harvested
     pub described: Option<Description>,
     pub licensed: Option<License>,
+    /// All of the files that were crawled during the harvest of the component
     pub files: Vec<File>,
     pub scores: TopLevelScore,
 }
@@ -234,8 +270,9 @@ impl<'de> serde::Deserialize<'de> for Definition {
 
 /// Gets the definitions for the supplied coordinates, note that in addition to
 /// this API call being limited to a maximum of 1000 coordinates per request,
-/// the request time is _extremely_ slow and can timeout, so it is recommended
-/// you specify a reasonable chunk size and send multiple parallel requests
+/// the request time is sometimes _extremely_ slow and can timeout, so it is
+/// recommended you specify a reasonable chunk size and send multiple parallel
+/// requests to reduce wall time.
 pub fn get<I>(chunk_size: usize, coordinates: I) -> impl Iterator<Item = Request<Bytes>>
 where
     I: IntoIterator<Item = crate::Coordinate>,

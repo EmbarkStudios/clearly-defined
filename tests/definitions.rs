@@ -172,9 +172,5 @@ fn deserialize_get_response() {
             &lic.attributions[..]
         );
         assert_eq!(["license".to_owned()], &lic.natures[..]);
-        assert_eq!(
-            "898b1ae9821e98daf8964c8d6c7f61641f5f5aa78ad500020771c0939ee0dea1",
-            lic.token.as_ref().unwrap()
-        );
     }
 }
