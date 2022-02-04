@@ -52,11 +52,48 @@ pub struct SourceLocation {
     pub url: String,
 }
 
+#[derive(PartialEq, Debug)]
+pub struct Date {
+    pub year: u32,
+    pub month: u8,
+    pub day: u8,
+}
+
+/// Parses a [`Date`] from a string, clearly-defined uses a `YYYY-MM-DD` format
+fn date<'de, D>(deserializer: D) -> Result<Date, D::Error>
+where
+    D: serde::de::Deserializer<'de>,
+{
+    use serde::de::Error;
+
+    let date_str: &str = Deserialize::deserialize(deserializer)?;
+
+    let mut iter = date_str.split('-');
+    let year = iter
+        .next()
+        .ok_or_else(|| Error::custom("date doesn't contain a year"))?
+        .parse()
+        .map_err(Error::custom)?;
+    let month = iter
+        .next()
+        .ok_or_else(|| Error::custom("date doesn't contain a month"))?
+        .parse()
+        .map_err(Error::custom)?;
+    let day = iter
+        .next()
+        .ok_or_else(|| Error::custom("date doesn't contain a day"))?
+        .parse()
+        .map_err(Error::custom)?;
+
+    Ok(Date { year, month, day })
+}
+
 #[derive(Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct Description {
     /// The Datetime when the component was actually released
-    pub release_date: chrono::NaiveDate,
+    #[serde(deserialize_with = "date")]
+    pub release_date: Date,
     /// The location where the component was harvested from
     pub source_location: Option<SourceLocation>,
     /// The website associated with the component

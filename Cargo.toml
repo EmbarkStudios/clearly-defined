@@ -32,8 +32,6 @@ anyhow = "1.0"
 bytes = "1.1"
 # Utf-8 paths
 camino = { version = "1.0", features = ["serde1"] }
-# Datetime representation
-chrono = { version = "0.4.10", features = ["serde"] }
 # HTTP helpers
 http = "0.2.0"
 # Semver parsing

@@ -4,16 +4,11 @@ targets = []
 vulnerability = "deny"
 unmaintained = "deny"
 yanked = "deny"
-ignore = [
-    # Don't care, only use chrono for datetime parsing
-    "RUSTSEC-2020-0159",
-    # Ditto
-    "RUSTSEC-2020-0071",
-]
+ignore = []
 
 [licenses]
 unlicensed = "deny"
-allow = ["MIT", "Apache-2.0"]
+allow = ["MIT", "Apache-2.0", "BSD-3-Clause"]
 copyleft = "deny"
 default = "deny"
 confidence-threshold = 0.8
@@ -39,10 +34,15 @@ name = "ring"
 expression = "MIT AND ISC AND OpenSSL"
 license-files = [{ path = "LICENSE", hash = 0xbd0eed23 }]
 
+[[licenses.clarify]]
+name = "encoding_rs"
+expression = "(Apache-2.0 OR MIT) AND BSD-3-Clause"
+license-files = [{ path = "COPYRIGHT", hash = 0x39f8ad31 }]
+
 [bans]
 multiple-versions = "deny"
 deny = []
-skip = []
+skip = [{ name = "itoa", version = "=0.4.8" }]
 
 [sources]
 unknown-registry = "deny"
