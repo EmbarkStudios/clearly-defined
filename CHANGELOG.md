@@ -1,3 +1,5 @@
+<!-- markdownlint-disable blanks-around-headings blanks-around-lists no-duplicate-heading -->
+
 # Changelog
 All notable changes to this project will be documented in this file.
 
@@ -6,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
+### Changed
+- [PR#3](https://github.com/EmbarkStudios/clearly-defined/pull/3) removed usage of `chrono`.
+
 ## [0.2.0] - 2021-10-25
 ### Added
 - First pass implementation of basic support for retrieving the license information for one or more coordinates.
