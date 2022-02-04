@@ -13,6 +13,7 @@ readme = "README.md"
 documentation = "https://docs.rs/cd"
 homepage = "https://github.com/EmbarkStudios/clearly-defined"
 keywords = ["license", "spdx"]
+categories = ["api-bindings"]
 
 [features]
 # Adds a blocking client implementation to make API requests with, can be combined
