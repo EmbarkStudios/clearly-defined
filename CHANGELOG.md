@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
+## [0.2.1] - 2022-02-04
 ### Changed
 - [PR#3](https://github.com/EmbarkStudios/clearly-defined/pull/3) removed usage of `chrono`.
 
@@ -21,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial add. This does absolutely nothing I just want to squat the name on crates.io
 
 <!-- next-url -->
-[Unreleased]: https://github.com/EmbarkStudios/cargo-about/compare/0.2.0...HEAD
+[Unreleased]: https://github.com/EmbarkStudios/cargo-about/compare/0.2.1...HEAD
+[0.2.1]: https://github.com/EmbarkStudios/cargo-about/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/EmbarkStudios/clearly-defined/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/EmbarkStudios/clearly-defined/releases/tag/0.1.0
