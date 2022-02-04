@@ -13,6 +13,7 @@ readme = "README.md"
 documentation = "https://docs.rs/cd"
 homepage = "https://github.com/EmbarkStudios/clearly-defined"
 keywords = ["license", "spdx"]
+categories = ["api-bindings"]
 
 [features]
 # Adds a blocking client implementation to make API requests with, can be combined
@@ -32,8 +33,6 @@ anyhow = "1.0"
 bytes = "1.1"
 # Utf-8 paths
 camino = { version = "1.0", features = ["serde1"] }
-# Datetime representation
-chrono = { version = "0.4.10", features = ["serde"] }
 # HTTP helpers
 http = "0.2.0"
 # Semver parsing
