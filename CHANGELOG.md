@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
+### Changed
+- [PR#5](https://github.com/EmbarkStudios/clearly-defined/pull/5) updated http and reqwest dependencies, and got rid of the `native-tls` and `rustls` features in favor of always using `rustls-tls`.
+
 ## [0.2.1] - 2022-02-04
 ### Changed
 - [PR#3](https://github.com/EmbarkStudios/clearly-defined/pull/3) removed usage of `chrono`.
