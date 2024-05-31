@@ -21,10 +21,6 @@ categories = ["api-bindings"]
 blocking = ["client", "reqwest/blocking"]
 # cache = []
 client = ["reqwest"]
-# Adds an async client implementation using the native TLS implementation
-native = ["client", "reqwest/native-tls"]
-# Adds an async client implementation using the rustls TLS implementation
-rustls = ["client", "reqwest/rustls-tls"]
 
 [dependencies]
 # Error handling
@@ -34,7 +30,7 @@ bytes = "1.1"
 # Utf-8 paths
 camino = { version = "1.0", features = ["serde1"] }
 # HTTP helpers
-http = "0.2.0"
+http = "1.1.0"
 # Semver parsing
 semver = "1.0"
 serde = { version = "1.0", features = ["derive"] }
@@ -46,13 +42,14 @@ url = "2.1"
 
 # "Built-in" HTTP request implementation
 [dependencies.reqwest]
-version = "0.11"
+version = "0.12"
 optional = true
 default-features = false
+features = ["rustls-tls"]
 
 [[example]]
 name = "cli"
-required-features = ["blocking", "rustls"]
+required-features = ["blocking"]
 
 [dev-dependencies]
-ansi_term = "0.12"
+nu-ansi-term = "0.50"
