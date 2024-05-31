@@ -276,7 +276,7 @@ impl std::str::FromStr for Coordinate {
         let version = it.next().context("missing version")?.parse()?;
 
         let curation_pr = match it.next() {
-            Some(pr) if pr == "pr" => Some(
+            Some("pr") => Some(
                 it.next()
                     .context("expected curation PR number")?
                     .parse()

@@ -1,4 +1,4 @@
-use ansi_term::Color;
+use nu_ansi_term::Color;
 
 fn main() -> Result<(), anyhow::Error> {
     let client = cd::client::Client::new();
