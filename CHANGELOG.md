@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
+### Changed
+- [PR#6](https://github.com/EmbarkStudios/clearly-defined/pull/6) updated crates.
+
 ## [0.3.0] - 2024-05-31
 ### Changed
 - [PR#5](https://github.com/EmbarkStudios/clearly-defined/pull/5) updated http and reqwest dependencies, and got rid of the `native-tls` and `rustls` features in favor of always using `rustls-tls`.
